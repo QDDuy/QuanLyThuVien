@@ -148,3 +148,4 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JTextField txtDkUser;
     // End of variables declaration//GEN-END:variables
 }
+// dtongnew
