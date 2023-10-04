@@ -48,15 +48,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="menu_bar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="logo_formMain" max="32767" attributes="0"/>
+                  <Component id="jLabel9" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="882" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel_menu" min="-2" pref="0" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
-                  <Component id="jPanel_main" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel_card" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -66,18 +66,18 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="logo_formMain" pref="163" max="32767" attributes="0"/>
+                          <Component id="jLabel9" pref="163" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="menu_bar" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel_menu" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel_main" max="32767" attributes="0"/>
+                      <Component id="jPanel_card" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -90,9 +90,6 @@
               <Dimension value="[320, 570]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel_menuMouseClicked"/>
-          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -100,23 +97,23 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="quanly_ke" alignment="0" max="32767" attributes="0"/>
-                          <Component id="quanly_sach" alignment="0" max="32767" attributes="0"/>
-                          <Component id="quanly_muontra" alignment="0" max="32767" attributes="0"/>
-                          <Component id="quanly_trehan" alignment="0" max="32767" attributes="0"/>
-                          <Component id="quanly_nguoidung" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="baocao_thongke" max="32767" attributes="0"/>
+                              <Component id="jLabel4" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="close_menu" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="quanly_docgia" max="32767" attributes="0"/>
+                              <Component id="jLabel2" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="quanly_nhapsach" max="32767" attributes="0"/>
+                          <Component id="jLabel6" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="close_form" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -129,80 +126,80 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="baocao_thongke" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="close_menu" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_muontra" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_trehan" pref="47" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="47" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_sach" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_nguoidung" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_docgia" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_ke" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="quanly_nhapsach" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="close_form" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="quanly_ke">
+            <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; ng&#x1b0;&#x1edd;i d&#xf9;ng"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="quanly_docgia">
+            <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; nh&#x1ead;p"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="quanly_sach">
+            <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Giao d&#x1ecb;ch"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="quanly_muontra">
+            <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x111;&#x1ed9;c gi&#x1ea3;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="quanly_trehan">
+            <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; s&#xe1;ch"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="quanly_nhapsach">
+            <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="quanly_nguoidung">
+            <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; tr&#x1ec5; h&#x1ea1;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="baocao_thongke">
+            <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; k&#x1ec7;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="close_menu">
+            <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icon/icons8-x-48.png"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="close_form">
+            <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icon/icons8-logout-35.png"/>
@@ -211,24 +208,21 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="logo_formMain">
+        <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/image.png"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="menu_bar">
+        <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icon/icons8-list-40.png"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu_barMouseClicked"/>
-          </Events>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel_main">
+        <Container class="javax.swing.JPanel" name="jPanel_card">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>
@@ -242,7 +236,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -262,7 +256,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -272,7 +266,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="quan_ly_sach">
+            <Container class="javax.swing.JPanel" name="quanly_sach">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card4"/>
@@ -282,7 +276,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -292,7 +286,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="quan_ly_muon_tra">
+            <Container class="javax.swing.JPanel" name="quanly_giaodich">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card5"/>
@@ -302,7 +296,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -312,7 +306,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="quan_ly_tre_han">
+            <Container class="javax.swing.JPanel" name="quanly_trehan">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card6"/>
@@ -322,7 +316,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -332,7 +326,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="quan_ly_nhap_sach">
+            <Container class="javax.swing.JPanel" name="jPanel6">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card7"/>
@@ -342,7 +336,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -352,7 +346,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="quan_ly_nguoi_dung">
+            <Container class="javax.swing.JPanel" name="jPanel7">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card8"/>
@@ -362,7 +356,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -372,7 +366,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Container class="javax.swing.JPanel" name="bao_cao_thong_ke">
+            <Container class="javax.swing.JPanel" name="jPanel8">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card9"/>
@@ -382,7 +376,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="868" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
