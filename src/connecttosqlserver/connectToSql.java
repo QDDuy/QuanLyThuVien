@@ -14,7 +14,7 @@ public class connectToSql {
 
         String username = "sa"; 
 
-        String password = "admin123"; 
+        String password = "123456789"; 
 
  
 
@@ -42,7 +42,7 @@ public class connectToSql {
 
 
 // in lỗi cần sửa khi sảy ra ngoại lệ
-                System.err.println("Loiiiiiiiiiii: " + e.getMessage()); 
+                System.err.println("Loi: " + e.getMessage()); 
 
         } 
     }
