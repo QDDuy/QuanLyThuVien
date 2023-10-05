@@ -1,14 +1,23 @@
 package DangNhap;
+import connecttosqlserver.DatabaseConnection;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+
 
 public class DangNhap extends javax.swing.JFrame {
-
+    private Connection conn ;
     public DangNhap() {
         initComponents();
         //txtUserName.setBackground(new java.awt.Color(0,0,0,1));        
         //txtPassWord.setBackground(new java.awt.Color(0,0,0,1));
+        conn=DatabaseConnection.getConnection();
     }
 
     @SuppressWarnings("unchecked")
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -21,8 +30,8 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtTaiKhoan = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(480, 156));
@@ -69,14 +78,19 @@ public class DangNhap extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Đăng Nhập");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-user-64.png"))); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jTextField1.setBorder(null);
+        txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTaiKhoan.setBorder(null);
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jPasswordField1.setBorder(null);
+        txtMatKhau.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtMatKhau.setBorder(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -88,18 +102,18 @@ public class DangNhap extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(161, 161, 161)
                 .addComponent(jLabel5)
@@ -117,13 +131,13 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -164,6 +178,45 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+ private void login() {
+        String taiKhoan = txtTaiKhoan.getText().trim();
+        char[] matKhauChars = txtMatKhau.getPassword();
+        String matKhau = new String(matKhauChars).trim();
+        
+        if (taiKhoan.isEmpty() || matKhau.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu không được để trống");
+            return;
+        }
+        
+        String sql_login = "select * from TaiKhoan where TenNguoiDung=? and MatKhau=?";
+        try {
+            // Kiểm tra xem conn đã được khởi tạo hay chưa
+            if (conn != null) {
+                PreparedStatement pst = conn.prepareStatement(sql_login);
+                pst.setString(1, taiKhoan);
+                pst.setString(2, matKhau);
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "Đăng Nhập thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Lỗi kết nối đến cơ sở dữ liệu");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện đăng nhập: " + e.getMessage());
+        }
+    }
+
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        login();
+        new form_main.Form_Main().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -184,7 +237,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txtMatKhau;
+    private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }

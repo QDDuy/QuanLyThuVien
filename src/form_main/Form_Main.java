@@ -319,7 +319,10 @@ public class Form_Main extends javax.swing.JFrame {
 
     private void menu_barMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_barMouseClicked
         // TODO add your handling code here:
+        
         open_menubar();
+        
+        
     }//GEN-LAST:event_menu_barMouseClicked
 
     private void close_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_menuMouseClicked
