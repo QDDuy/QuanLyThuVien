@@ -34,7 +34,7 @@ public class DangNhap extends javax.swing.JFrame {
         txtMatKhau = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(480, 156));
+        setLocation(new java.awt.Point(250, 100));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -199,6 +199,8 @@ public class DangNhap extends javax.swing.JFrame {
                 
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(this, "Đăng Nhập thành công");
+                    new form_main.Form_main1().setVisible(true);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");
                 }
@@ -214,8 +216,7 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         login();
-        new form_main.Form_main1().setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
