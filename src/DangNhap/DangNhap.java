@@ -199,7 +199,7 @@ public class DangNhap extends javax.swing.JFrame {
                 
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(this, "Đăng Nhập thành công");
-                    new form_main.Form_main1().setVisible(true);
+                    new form_main.Form_Main().setVisible(true);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");
@@ -219,15 +219,7 @@ public class DangNhap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DangNhap().setVisible(true);
-                
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
