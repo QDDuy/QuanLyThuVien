@@ -214,7 +214,8 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         login();
-        new form_main.Form_Main().setVisible(true);
+        new form_main.Form_main1().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
