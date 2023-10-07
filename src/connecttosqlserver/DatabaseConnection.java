@@ -1,4 +1,6 @@
 package connecttosqlserver;
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -6,28 +8,21 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static Connection conn;
 
-    public static Connection getConnection() {
-        
+    public static Connection connect() {
+        if (conn == null) {
             String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=QuanLyThuVien;trustServerCertificate=true";
             String username = "sa";
-            String password = "loiha12345";
-        
-            //  bắt ngoại lệ khi connect
-        try {
-            // Kết nối đến cơ sở dữ liệu SQL Server
-            conn = DriverManager.getConnection(jdbcUrl, username, password);
+            String password = "123456789";
 
-            // Kiểm tra kết nối thành công
-            if (conn != null) {
-                System.out.println("Kết nối đến SQL Server thành công!");
-                conn.close(); // Đóng kết nối sau khi sử dụng
+            try {
+                conn = DriverManager.getConnection(jdbcUrl, username, password);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Xử lý lỗi kết nối tại đây (ví dụ: ghi log, thông báo lỗi, v.v.)
             }
-        } catch (SQLException e) {
-// in lỗi cần sửa khi sảy ra ngoại lệ
-            e.printStackTrace();
-            System.err.println("Lỗi kết nối đến SQL Server: " + e.getMessage());
         }
         return conn;
-        
     }
+
+    
 }

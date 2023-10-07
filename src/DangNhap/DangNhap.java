@@ -1,10 +1,12 @@
 package DangNhap;
 import connecttosqlserver.DatabaseConnection;
+import form_main.Form_Main;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import javax.swing.SwingUtilities;
 
 
 public class DangNhap extends javax.swing.JFrame {
@@ -13,7 +15,7 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         //txtUserName.setBackground(new java.awt.Color(0,0,0,1));        
         //txtPassWord.setBackground(new java.awt.Color(0,0,0,1));
-        conn=DatabaseConnection.getConnection();
+        conn=DatabaseConnection.connect();
     }
 
     @SuppressWarnings("unchecked")
@@ -199,8 +201,9 @@ public class DangNhap extends javax.swing.JFrame {
                 
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(this, "Đăng Nhập thành công");
-                    new form_main.Form_Main().setVisible(true);
                     this.dispose();
+                    Form_Main fm=new Form_Main();
+                    fm.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");
                 }
@@ -219,7 +222,6 @@ public class DangNhap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
