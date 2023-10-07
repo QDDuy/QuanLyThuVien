@@ -6,9 +6,12 @@
 package form_main;
 
 import Hieu_ung.Hieuung;
+import danh_muc.danhmuc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
@@ -28,7 +31,17 @@ public class Form_Main extends javax.swing.JFrame {
     public Form_Main() {
         initComponents();
         Hieuung hieu_ung = new Hieuung(jPanel_view);
-        hieu_ung.setView(jPanel_sach,quanly_docgia);
+       
+        List<danhmuc> list = new ArrayList<>();
+        list.add(new danhmuc("quan_ly_doc_gia", jPanel_docgia, quanly_docgia));
+        list.add(new danhmuc("quan_ly_sach", jPanel_sach, quanlysach));
+        list.add(new danhmuc("quan_ly_muon_tra", jPanel_muontra, quanly_muontra));
+        list.add(new danhmuc("quan_ly_tre_han", jPanel_trehan, quanlytrehan));
+        list.add(new danhmuc("quan_ly_nhap_sach", jPanel_nhap, quanly_nhap));
+        list.add(new danhmuc("thong_ke", jPanel_thongke, thongke));
+        list.add(new danhmuc("quan_ly_nguoi_dung", jPanel_nguoidung, quanly_nguoidung));
+        hieu_ung.seteVent(list);
+        
     }
 
     /**
