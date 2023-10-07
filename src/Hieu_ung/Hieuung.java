@@ -6,7 +6,12 @@ package Hieu_ung;
 
 import danh_muc.danhmuc;
 import form_main.quan_ly_doc_giaJPanel;
+import form_main.quan_ly_muon_traJPanel;
 import form_main.quan_ly_nguoi_dungJPanel;
+import form_main.quan_ly_nhapJPanel;
+import form_main.quan_ly_sach_JPanel;
+import form_main.quan_ly_thong_keJPanel;
+import form_main.quan_ly_tre_hanJPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
@@ -67,16 +72,22 @@ public class Hieuung {
         public void mouseClicked(MouseEvent e) {
             switch(kind){
                 case "quan_ly_doc_gia":
+                    node = new quan_ly_doc_giaJPanel();
                     break;
                 case "quan_ly_sach":
+                    node = new quan_ly_sach_JPanel();
                     break;
                 case "quan_ly_muon_tra":
+                    node = new quan_ly_muon_traJPanel();
                     break;
                 case "quan_ly_tre_han":
+                    node = new quan_ly_tre_hanJPanel();
                     break;
                 case "quan_ly_nhap_sach":
+                    node = new  quan_ly_nhapJPanel();
                     break;
                 case "thong_ke":
+                    node = new quan_ly_thong_keJPanel();
                     break;
                 case "quan_ly_nguoi_dung":
                     node = new quan_ly_nguoi_dungJPanel();
@@ -114,8 +125,8 @@ public class Hieuung {
         @Override
         public void mouseExited(MouseEvent e) {
             if(!Select.equalsIgnoreCase(kind)){
-                jpnItem.setBackground(new Color(75, 175, 107));
-                jlbItem.setBackground(new Color(75, 175, 107));
+                jpnItem.setBackground(new Color(217, 235, 255));
+                jlbItem.setBackground(new Color(217, 235, 255));
             }
         }
     private void set_change_bg(String kind){
@@ -124,8 +135,8 @@ public class Hieuung {
                 lis.getJpn().setBackground(new Color(204, 206, 107));
                 lis.getJlb().setBackground(new Color(204, 206, 107));
             }else{
-                lis.getJpn().setBackground(new Color(75, 175, 107));
-                lis.getJlb().setBackground(new Color(75, 175, 107));
+                lis.getJpn().setBackground(new Color(217, 235, 255));
+                lis.getJlb().setBackground(new Color(217, 235, 255));
             }
         }
     }

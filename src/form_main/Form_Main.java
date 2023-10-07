@@ -73,9 +73,6 @@ public class Form_Main extends javax.swing.JFrame {
         close_form = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel_view = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý thư viện");
@@ -86,13 +83,15 @@ public class Form_Main extends javax.swing.JFrame {
         jPanel_Frame.setBackground(new java.awt.Color(204, 255, 204));
         jPanel_Frame.setPreferredSize(new java.awt.Dimension(1280, 700));
 
-        jPanel_menu.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel_menu.setBackground(new java.awt.Color(217, 235, 255));
         jPanel_menu.setPreferredSize(new java.awt.Dimension(204, 700));
 
+        jLabel_logo.setBackground(new java.awt.Color(217, 235, 255));
         jLabel_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/image.png"))); // NOI18N
 
-        jPanel_docgia.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_docgia.setBackground(new java.awt.Color(217, 235, 255));
 
+        quanly_docgia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         quanly_docgia.setText("Quản lý độc giả");
         quanly_docgia.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 0, 2, 0));
 
@@ -112,8 +111,9 @@ public class Form_Main extends javax.swing.JFrame {
                 .addComponent(quanly_docgia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_thongke.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_thongke.setBackground(new java.awt.Color(217, 235, 255));
 
+        thongke.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         thongke.setText("Thống kê");
 
         javax.swing.GroupLayout jPanel_thongkeLayout = new javax.swing.GroupLayout(jPanel_thongke);
@@ -132,8 +132,9 @@ public class Form_Main extends javax.swing.JFrame {
                 .addComponent(thongke, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_nguoidung.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_nguoidung.setBackground(new java.awt.Color(217, 235, 255));
 
+        quanly_nguoidung.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         quanly_nguoidung.setText("Quản lý người dùng");
 
         javax.swing.GroupLayout jPanel_nguoidungLayout = new javax.swing.GroupLayout(jPanel_nguoidung);
@@ -152,8 +153,9 @@ public class Form_Main extends javax.swing.JFrame {
                 .addComponent(quanly_nguoidung, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_nhap.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_nhap.setBackground(new java.awt.Color(217, 235, 255));
 
+        quanly_nhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         quanly_nhap.setText("Quản lý nhập");
 
         javax.swing.GroupLayout jPanel_nhapLayout = new javax.swing.GroupLayout(jPanel_nhap);
@@ -172,8 +174,9 @@ public class Form_Main extends javax.swing.JFrame {
                 .addComponent(quanly_nhap, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_trehan.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_trehan.setBackground(new java.awt.Color(217, 235, 255));
 
+        quanlytrehan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         quanlytrehan.setText("Quản lý trễ hạn");
 
         javax.swing.GroupLayout jPanel_trehanLayout = new javax.swing.GroupLayout(jPanel_trehan);
@@ -192,8 +195,9 @@ public class Form_Main extends javax.swing.JFrame {
                 .addComponent(quanlytrehan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel_muontra.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_muontra.setBackground(new java.awt.Color(217, 235, 255));
 
+        quanly_muontra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         quanly_muontra.setText("Quản lý mượn trả");
 
         javax.swing.GroupLayout jPanel_muontraLayout = new javax.swing.GroupLayout(jPanel_muontra);
@@ -212,8 +216,9 @@ public class Form_Main extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel_sach.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel_sach.setBackground(new java.awt.Color(217, 235, 255));
 
+        quanlysach.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         quanlysach.setText("Quản lý sách");
 
         javax.swing.GroupLayout jPanel_sachLayout = new javax.swing.GroupLayout(jPanel_sach);
@@ -288,37 +293,15 @@ public class Form_Main extends javax.swing.JFrame {
         jPanel_view.setBackground(new java.awt.Color(204, 204, 204));
         jPanel_view.setPreferredSize(new java.awt.Dimension(1070, 570));
 
-        jButton1.setText("Thêm");
-        jButton1.setPreferredSize(new java.awt.Dimension(75, 30));
-
-        jButton2.setText("Xóa");
-        jButton2.setPreferredSize(new java.awt.Dimension(75, 30));
-
-        jButton3.setText("Sửa");
-        jButton3.setPreferredSize(new java.awt.Dimension(75, 30));
-
         javax.swing.GroupLayout jPanel_viewLayout = new javax.swing.GroupLayout(jPanel_view);
         jPanel_view.setLayout(jPanel_viewLayout);
         jPanel_viewLayout.setHorizontalGroup(
             jPanel_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_viewLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 1070, Short.MAX_VALUE)
         );
         jPanel_viewLayout.setVerticalGroup(
             jPanel_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_viewLayout.createSequentialGroup()
-                .addContainerGap(507, Short.MAX_VALUE)
-                .addGroup(jPanel_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+            .addGap(0, 570, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel_FrameLayout = new javax.swing.GroupLayout(jPanel_Frame);
@@ -367,9 +350,6 @@ public class Form_Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel close_form;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_logo;
     private javax.swing.JPanel jPanel_Frame;
