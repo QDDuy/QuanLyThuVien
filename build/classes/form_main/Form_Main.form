@@ -431,6 +431,9 @@
                   <Image iconType="3" name="/icon/icons8-logout-35.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="close_formMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

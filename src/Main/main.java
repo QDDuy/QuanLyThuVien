@@ -4,7 +4,7 @@
  */
 package Main;
 
-import form_main.Form_Main;
+import DangNhap.DangNhap;
 
 /**
  *
@@ -12,7 +12,7 @@ import form_main.Form_Main;
  */
 public class main {
     public static void main(String[] args) {
-        new Form_Main().setVisible(true);
+        new DangNhap().setVisible(true);
     }
     
 }

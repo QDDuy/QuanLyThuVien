@@ -239,6 +239,11 @@ public class Form_Main extends javax.swing.JFrame {
 
         close_form.setBackground(new java.awt.Color(255, 255, 255));
         close_form.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-logout-35.png"))); // NOI18N
+        close_form.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                close_formMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_menuLayout = new javax.swing.GroupLayout(jPanel_menu);
         jPanel_menu.setLayout(jPanel_menuLayout);
@@ -344,6 +349,12 @@ public class Form_Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void close_formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_formMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        new DangNhap.DangNhap().setVisible(true);
+    }//GEN-LAST:event_close_formMouseClicked
 
     
     
