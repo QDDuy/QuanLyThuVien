@@ -4,10 +4,15 @@
  */
 package DAO;
 
+import java.sql.Date;
+
 /**
  *
  * @author haloi
  */
 public class QuanLyTreHan {
-    
+    private int maphi;
+    private int madocgia;
+    private Double sotien;
+    private Date ngayphatsinh;
 }
