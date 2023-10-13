@@ -4,6 +4,21 @@
  */
 package form_main;
 
+import Contructor.QuanLyDocGia;
+import connectsql.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author haloi
@@ -13,10 +28,95 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form quan_ly_doc_giaJPanel
      */
+    List<QuanLyDocGia> list = new QuanLyDocGia().getList();
+    QuanLyDocGia DocGia;
+    private static int pos = 0;
+    private boolean isAsc = true;
+    private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_doc_giaJPanel() {
         initComponents();
+        view();
+        table_view();
+        
+        this.jTable_view.setAutoCreateRowSorter(true);
+
+        // Thêm phương thức sort() cho bảng
+        this.jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Kiểm tra xem người dùng có click chuột vào cột Ho va ten đệm hay không
+                if (evt.getSource() == jTable_view && evt.getClickCount() == 1 && evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+                    // Lấy cột mà người dùng click chuột
+                    int columnIndex = jTable_view.getColumnModel().getColumnIndexAtX(evt.getX());
+                    // Kiểm tra xem cột đó có phải là cột Ho va ten đệm hay không
+                    if (columnIndex == 2) {
+                        // Sắp xếp dữ liệu trong bảng theo thứ tự tăng dần hoặc giảm dần
+                        sort();
+                    }
+                }
+            }
+        });
+        
+        
+        tableRowSorter = new TableRowSorter<>((DefaultTableModel) this.jTable_view.getModel());
+        this.jTable_view.setRowSorter(tableRowSorter);
+
+        // Thêm sự kiện keyTyped() cho ô textbox jsearch
+        this.txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Lấy giá trị được nhập vào ô textbox jsearch
+                String text = txtTimKiem.getText();
+
+                // Sử dụng phương thức setRowFilter() của đối tượng RowSorter để lọc dữ liệu trong bảng
+                tableRowSorter.setRowFilter(RowFilter.regexFilter(text));
+            }
+        });
+   
+    }
+    
+    private void sort() {
+        // Lấy mô hình của bảng
+        DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
+
+        // Tạo một đối tượng Comparator để so sánh dữ liệu trong cột Ho va ten đệm
+        Comparator<QuanLyDocGia> comparator = (o1, o2) -> {
+            if (this.isAsc) {
+                return o1.getTenKH().compareToIgnoreCase(o2.getTenKH());
+            } else {
+                return o2.getTenKH().compareToIgnoreCase(o1.getTenKH());
+            }
+        };
+
+        
+        
+
+        // Đổi trạng thái sắp xếp của cột Ho va ten đệm
+        this.isAsc = !this.isAsc;
+    }
+    
+    public void view(){
+        DocGia = list.get(pos);
+        this.txtMaThe.setText(Integer.toString(DocGia.getMaTHe()));
+        this.txtHoTen.setText(DocGia.getTenKH());
+        this.txtDiaChi.setText(DocGia.getDiachi());
+        this.txtSoPhone.setText(DocGia.getSDT());
+        this.txtCCCD.setText(DocGia.getCccd());
+        this.txtEmail.setText(DocGia.getEmail());
+        
     }
 
+    public void table_view(){
+        DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
+        model.setNumRows(0);
+        
+        for(QuanLyDocGia x : list){
+            model.addRow(new Object[]{ x.getMaTHe(), x.getTenKH(), x.getDiachi(), x.getSDT(), x.getCccd(), x.getEmail()});
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +127,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_view = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         txtMaThe = new javax.swing.JTextField();
@@ -42,15 +142,15 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnThemDocGia = new javax.swing.JButton();
         btnXoaDocGia = new javax.swing.JButton();
         btnUpdatDocGia = new javax.swing.JButton();
-        btnTimKiemDocGia = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1070, 570));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_view.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -58,9 +158,13 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 "Mã Thẻ", "Họ tên", "Địa Chỉ", "Số Điện Thoại", "Số CCCD", "Email"
             }
         ));
-        jTable1.setEnabled(false);
-        jTable1.setFillsViewportHeight(true);
-        jScrollPane1.setViewportView(jTable1);
+        jTable_view.setFillsViewportHeight(true);
+        jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_viewMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable_view);
 
         jLabel1.setText("Mã thẻ :");
 
@@ -74,6 +178,8 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Email :");
 
+        jLabel7.setText("tìm kiếm");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,7 +192,8 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
@@ -102,7 +209,9 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMaThe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,7 +236,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         btnThemDocGia.setText("Thêm");
@@ -138,9 +247,6 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
 
         btnUpdatDocGia.setText("Update");
         btnUpdatDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
-
-        btnTimKiemDocGia.setText("Tìm kiếm");
-        btnTimKiemDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -153,8 +259,6 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 .addComponent(btnXoaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(btnUpdatDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143)
-                .addComponent(btnTimKiemDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -164,8 +268,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdatDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiemDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdatDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
 
@@ -177,7 +280,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -191,10 +294,15 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable_viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_viewMouseClicked
+        // TODO add your handling code here:
+        pos = this.jTable_view.getSelectedRow();
+        view();
+    }//GEN-LAST:event_jTable_viewMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThemDocGia;
-    private javax.swing.JButton btnTimKiemDocGia;
     private javax.swing.JButton btnUpdatDocGia;
     private javax.swing.JButton btnXoaDocGia;
     private javax.swing.JLabel jLabel1;
@@ -203,10 +311,11 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_view;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;

@@ -4,15 +4,22 @@
  */
 package Main;
 
+
+import Contructor.QuanLyDocGia;
+
 import DangNhap.DangNhap;
+import form_main.quan_ly_doc_giaJPanel;
 
 /**
  *
  * @author haloi
  */
 public class main {
+    
     public static void main(String[] args) {
-        new DangNhap().setVisible(true);
+        
+       new DangNhap().setVisible(true);
     }
+    
     
 }

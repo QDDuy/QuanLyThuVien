@@ -1,4 +1,4 @@
-package connecttosqlserver;
+package connectsql;
 
 
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static Connection conn;
 
-    public static Connection connect() {
+    public static Connection getConnection() {
         if (conn == null) {
             String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=QuanLyThuVien;trustServerCertificate=true";
             String username = "sa";

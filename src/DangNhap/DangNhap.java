@@ -1,5 +1,5 @@
 package DangNhap;
-import connecttosqlserver.DatabaseConnection;
+import connectsql.DatabaseConnection;
 import form_main.Form_Main;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -15,7 +15,7 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         //txtUserName.setBackground(new java.awt.Color(0,0,0,1));        
         //txtPassWord.setBackground(new java.awt.Color(0,0,0,1));
-        conn=DatabaseConnection.connect();
+        conn=DatabaseConnection.getConnection();
     }
 
     @SuppressWarnings("unchecked")
