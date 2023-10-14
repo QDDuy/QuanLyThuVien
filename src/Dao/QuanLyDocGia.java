@@ -115,7 +115,6 @@ public class QuanLyDocGia {
                 list.add(docgia);
             }
             ps.close();
-            conn.close();
         }catch(Exception e){
             e.printStackTrace();
         }
