@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import com.toedter.calendar.JDateChooser;
+
 
 /**
  *
@@ -94,10 +96,10 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         this.txtMaGD.setText(Integer.toString(muonTra.getMaGiaodich()));
         this.txtMaThe.setText(Integer.toString(muonTra.getMathe()));
         this.txtMaSach.setText(Integer.toString(muonTra.getMasach()));
-        this.ngaymuon.setDate(muonTra.getNgaymuon());
-        this.ngayhethan.setDate(muonTra.getNgayhethan());
-        this.ngaytra.setDate(muonTra.getNgaytrasach());
-        this.txtSoTien.setText(Integer.toString(muonTra.getSotien()));
+        this.txtNgayMuon.setDate(muonTra.getNgaymuon());
+        this.txtNgayHetHan.setDate(muonTra.getNgayhethan());
+        this.txtNgayTraSach.setDate(muonTra.getNgaytrasach());
+        this.txtSoTien.setText(Double.toString(muonTra.getSotien()));
         
     }
     
@@ -106,9 +108,9 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));        
-        muonTra.setNgaymuon((Date) ngaymuon.getDate());
-        muonTra.setNgayhethan((Date) ngayhethan.getDate());
-        muonTra.setNgaytrasach((Date) ngaytra.getDate());
+        muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
+        muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
+        muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
         muonTra.setSotien(Integer.parseInt(txtSoTien.getText()));
         muonTra.create(muonTra);
         return muonTra;
@@ -118,9 +120,9 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));        
-        muonTra.setNgaymuon((Date) ngaymuon.getDate());
-        muonTra.setNgayhethan((Date) ngayhethan.getDate());
-        muonTra.setNgaytrasach((Date) ngaytra.getDate());
+        muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
+        muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
+        muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
         muonTra.setSotien(Integer.parseInt(txtSoTien.getText()));
         muonTra.edit(muonTra);
         return muonTra;
@@ -149,6 +151,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -168,9 +171,9 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        ngayhethan = new com.toedter.calendar.JDateChooser();
-        ngaymuon = new com.toedter.calendar.JDateChooser();
-        ngaytra = new com.toedter.calendar.JDateChooser();
+        txtNgayMuon = new com.toedter.calendar.JDateChooser();
+        txtNgayHetHan = new com.toedter.calendar.JDateChooser();
+        txtNgayTraSach = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         btnXoaMT = new javax.swing.JButton();
         btnUpdateMT = new javax.swing.JButton();
@@ -206,15 +209,11 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Số Tiền :");
 
-        ngayhethan.setDateFormatString("yyyy/MM/dd");
-        ngayhethan.setMaxSelectableDate(new java.util.Date(253370743269000L));
-        ngayhethan.setMinSelectableDate(new java.util.Date(-62135791131000L));
+        txtNgayMuon.setDateFormatString("yyyy/MM/dd");
 
-        ngaymuon.setDateFormatString("yyyy/MM/dd");
-        ngaymuon.setMaxSelectableDate(new java.util.Date(253370743269000L));
-        ngaymuon.setMinSelectableDate(new java.util.Date(-62135791131000L));
+        txtNgayHetHan.setDateFormatString("yyyy/MM/dd");
 
-        ngaytra.setDateFormatString("yyyy/MM/dd");
+        txtNgayTraSach.setDateFormatString("yyyy/MM/dd");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,9 +243,9 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                             .addComponent(txtSoTien, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtMaThe, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(ngayhethan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ngaymuon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ngaytra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNgayHetHan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNgayTraSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -266,19 +265,19 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(ngaymuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNgayMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ngayhethan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(ngaytra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(txtNgayTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -416,12 +415,12 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_view;
-    private com.toedter.calendar.JDateChooser ngayhethan;
-    private com.toedter.calendar.JDateChooser ngaymuon;
-    private com.toedter.calendar.JDateChooser ngaytra;
     private javax.swing.JTextField txtMaGD;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtMaThe;
+    private com.toedter.calendar.JDateChooser txtNgayHetHan;
+    private com.toedter.calendar.JDateChooser txtNgayMuon;
+    private com.toedter.calendar.JDateChooser txtNgayTraSach;
     private javax.swing.JTextField txtSoTien;
     private javax.swing.JTextField txtTimKiemmt;
     // End of variables declaration//GEN-END:variables
