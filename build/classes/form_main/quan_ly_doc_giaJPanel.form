@@ -270,6 +270,9 @@
               <Dimension value="[90, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemDocGiaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnXoaDocGia">
           <Properties>
@@ -278,6 +281,9 @@
               <Dimension value="[90, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaDocGiaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnUpdatDocGia">
           <Properties>
@@ -286,6 +292,9 @@
               <Dimension value="[90, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdatDocGiaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

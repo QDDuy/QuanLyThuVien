@@ -9,10 +9,13 @@ import connectsql.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SwingUtilities;
@@ -114,7 +117,34 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{ x.getMaTHe(), x.getTenKH(), x.getDiachi(), x.getSDT(), x.getCccd(), x.getEmail()});
         }
     }
-    
+    public QuanLyDocGia getmodel_create() throws Exception{
+        QuanLyDocGia docGia = new QuanLyDocGia();
+        docGia.setMaTHe(Integer.parseInt(txtMaThe.getText()));
+        docGia.setTenKH(txtHoTen.getText());
+        docGia.setDiachi(txtDiaChi.getText());
+        docGia.setSDT(txtSoPhone.getText());
+        docGia.setCccd(txtCCCD.getText());
+        docGia.setEmail(txtEmail.getText());
+        DocGia.create(docGia);
+        return docGia;
+    }
+    public QuanLyDocGia getmodel_update() throws Exception{
+        QuanLyDocGia docGia = new QuanLyDocGia();
+        docGia.setMaTHe(Integer.parseInt(txtMaThe.getText()));
+        docGia.setTenKH(txtHoTen.getText());
+        docGia.setDiachi(txtDiaChi.getText());
+        docGia.setSDT(txtSoPhone.getText());
+        docGia.setCccd(txtCCCD.getText());
+        docGia.setEmail(txtEmail.getText());
+        DocGia.edit(docGia);
+        return docGia;
+    }
+    public QuanLyDocGia getmodel_delete() throws Exception{
+        QuanLyDocGia docGia = new QuanLyDocGia();
+        docGia.setMaTHe(Integer.parseInt(txtMaThe.getText()));
+        DocGia.delete(docGia);
+        return docGia;
+    }
     
     
     /**
@@ -241,12 +271,27 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
 
         btnThemDocGia.setText("Thêm");
         btnThemDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnThemDocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDocGiaActionPerformed(evt);
+            }
+        });
 
         btnXoaDocGia.setText("Xóa");
         btnXoaDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnXoaDocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaDocGiaActionPerformed(evt);
+            }
+        });
 
         btnUpdatDocGia.setText("Update");
         btnUpdatDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnUpdatDocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdatDocGiaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -298,6 +343,34 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
         pos = this.jTable_view.getSelectedRow();
         view();
     }//GEN-LAST:event_jTable_viewMouseClicked
+
+    private void btnThemDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDocGiaActionPerformed
+        // TODO add your handling code here:
+         try {
+            QuanLyDocGia docGia = getmodel_create();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+         
+    }//GEN-LAST:event_btnThemDocGiaActionPerformed
+
+    private void btnUpdatDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatDocGiaActionPerformed
+        // TODO add your handling code here:
+        try {
+            QuanLyDocGia docGia = getmodel_update();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+    }//GEN-LAST:event_btnUpdatDocGiaActionPerformed
+
+    private void btnXoaDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDocGiaActionPerformed
+        // TODO add your handling code here:
+                try {
+            QuanLyDocGia docGia = getmodel_delete();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+    }//GEN-LAST:event_btnXoaDocGiaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
