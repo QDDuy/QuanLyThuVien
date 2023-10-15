@@ -25,23 +25,20 @@ public class QuanLyMuonTra {
     private Date ngaymuon;
     private Date ngayhethan;
     private Date ngaytrasach;
-    private Double sotien;
+    private int sotien;
     
-    public QuanLyMuonTra(int maGiaodich, int mathe, int masach, Date ngaymuon, Date ngayhethan, Date ngaytrasach, Double sotien) {
+    public QuanLyMuonTra(int maGiaodich, int mathe, int masach, Date ngaymuon, Date ngayhethan, Date ngaytrasach) {
         this.maGiaodich = maGiaodich;
         this.mathe = mathe;
         this.masach = masach;
         this.ngaymuon = ngaymuon;
         this.ngayhethan = ngayhethan;
         this.ngaytrasach = ngaytrasach;
-        this.sotien = sotien;
+        
     }
 
-    private QuanLyMuonTra() {
-    }
-
-    
-    
+    public QuanLyMuonTra() {
+    }  
     
     public int getMaGiaodich() {
         return maGiaodich;
@@ -67,7 +64,9 @@ public class QuanLyMuonTra {
         return ngaytrasach;
     }
 
-    public Double getSotien() {
+    public int getSotien() {
+        int so_ngaymuon = (int) (this.ngayhethan.getTime() - this.ngaymuon.getTime()) / (24 * 60 * 60 * 1000);
+        sotien = so_ngaymuon * 10000;
         return sotien;
     }
     
@@ -95,13 +94,13 @@ public class QuanLyMuonTra {
         this.ngaytrasach = ngaytrasach;
     }
 
-    public void setSotien(Double sotien) {
+    public void setSotien(int sotien) {
         this.sotien = sotien;
     }
     // xu ly su kien them, sua, xoa, tim kiem, hiển thị
     public List<QuanLyMuonTra> getList(){
         Connection conn = DatabaseConnection.getConnection();
-        String sql = "select * from DocGia";
+        String sql = "select * from Muontra";
         List<QuanLyMuonTra> list = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -114,7 +113,7 @@ public class QuanLyMuonTra {
                 muontra.setNgaymuon(rs.getDate("NgayMuon"));
                 muontra.setNgayhethan(rs.getDate("NgayHetHan"));
                 muontra.setNgaytrasach(rs.getDate("NgayTraSach"));
-                muontra.setSotien(rs.getDouble("SoTien"));
+                muontra.setSotien(rs.getInt("SoTien"));
                 list.add(muontra);
             }
             ps.close();

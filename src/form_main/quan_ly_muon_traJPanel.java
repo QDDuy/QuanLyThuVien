@@ -34,16 +34,16 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             view();
             table_view();
         
-        this.jTable1.setAutoCreateRowSorter(true);
+        this.jTable_view.setAutoCreateRowSorter(true);
 
         // Thêm phương thức sort() cho bảng
-        this.jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 // Kiểm tra xem người dùng có click chuột vào cột Ho va ten đệm hay không
-                if (evt.getSource() == jTable1 && evt.getClickCount() == 1 && evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+                if (evt.getSource() == jTable_view && evt.getClickCount() == 1 && evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
                     // Lấy cột mà người dùng click chuột
-                    int columnIndex = jTable1.getColumnModel().getColumnIndexAtX(evt.getX());
+                    int columnIndex = jTable_view.getColumnModel().getColumnIndexAtX(evt.getX());
                     // Kiểm tra xem cột đó có phải là cột Ho va ten đệm hay không
                     if (columnIndex == 2) {
                         // Sắp xếp dữ liệu trong bảng theo thứ tự tăng dần hoặc giảm dần
@@ -54,8 +54,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         });
         
         
-        tableRowSorter = new TableRowSorter<>((DefaultTableModel) this.jTable1.getModel());
-        this.jTable1.setRowSorter(tableRowSorter);
+        tableRowSorter = new TableRowSorter<>((DefaultTableModel) this.jTable_view.getModel());
+        this.jTable_view.setRowSorter(tableRowSorter);
 
         // Thêm sự kiện keyTyped() cho ô textbox jsearch
         this.txtTimKiemmt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -72,20 +72,18 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
     private void sort() {
         // Lấy mô hình của bảng
-        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
 
         // Tạo một đối tượng Comparator để so sánh dữ liệu trong cột Ho va ten đệm
         Comparator<QuanLyMuonTra> comparator = (o1, o2) -> {
             if (this.isAsc) {
-                return o1.getMaGiaodich().compareToIgnoreCase(o2.getMaGiaodich());
+                return o1.getNgaymuon().compareTo(o2.getNgaymuon());
             } else {
-                return o2.getMaGiaodich().compareToIgnoreCase(o1.getMaGiaodich());
+                return o2.getNgaymuon().compareTo(o1.getNgaymuon());
             }
         };
 
         
-        
-
         // Đổi trạng thái sắp xếp của cột Ho va ten đệm
         this.isAsc = !this.isAsc;
     }
@@ -93,11 +91,11 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     public void view(){
         muonTra = list.get(pos);
         this.txtMaGD.setText(Integer.toString(muonTra.getMaGiaodich()));
-        this.txtMaThe.setText(muonTra.getMathe());
-        this.txtMaSach.setText(muonTra.getMasach());
-        this.txtNgayM.setText(muonTra.getNgaymuon());
-        this.txtCCCD.setText(DocGia.getCccd());
-        this.txtEmail.setText(DocGia.getEmail());
+        this.txtMaThe.setText(Integer.toString(muonTra.getMathe()));
+        this.txtMaSach.setText(Integer.toString(muonTra.getMasach()));
+        this.ngaymuon.setDate(muonTra.getNgaymuon());
+        this.ngayhethan.setDate(muonTra.getNgayhethan());
+        this.txtSoTien.setText(Integer.toString(muonTra.getSotien()));
         
     }
 
@@ -105,8 +103,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
         model.setNumRows(0);
         
-        for(QuanLyDocGia x : list){
-            model.addRow(new Object[]{ x.getMaTHe(), x.getTenKH(), x.getDiachi(), x.getSDT(), x.getCccd(), x.getEmail()});
+        for(QuanLyMuonTra x : list){
+            model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
         }
     }
     @SuppressWarnings("unchecked")
@@ -114,14 +112,12 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_view = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtTimKiemmt = new javax.swing.JTextField();
         txtMaGD = new javax.swing.JTextField();
         txtMaThe = new javax.swing.JTextField();
         txtMaSach = new javax.swing.JTextField();
-        txtNgayM = new javax.swing.JTextField();
-        txtNgayHH = new javax.swing.JTextField();
         txtNgayTra = new javax.swing.JTextField();
         txtSoTien = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -131,13 +127,15 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        ngayhethan = new com.toedter.calendar.JDateChooser();
+        ngaymuon = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         btnXoaMT = new javax.swing.JButton();
         btnUpdateMT = new javax.swing.JButton();
         btnThemMT = new javax.swing.JButton();
         btnTimKiemMT = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_view.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -145,7 +143,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 "Mã giao dịch", "Mã Thẻ", "Mã Sách", "Ngày Mượn", "Ngày Hết Hạn", "Ngày Trả Sách", "Số Tiền"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_view);
 
         txtMaGD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +164,14 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         jLabel6.setText("Ngày Trả :");
 
         jLabel7.setText("Số Tiền :");
+
+        ngayhethan.setDateFormatString("dd/mm/yyyy");
+        ngayhethan.setMaxSelectableDate(new java.util.Date(253370743269000L));
+        ngayhethan.setMinSelectableDate(new java.util.Date(-62135791131000L));
+
+        ngaymuon.setDateFormatString("dd/mm/yyyy");
+        ngaymuon.setMaxSelectableDate(new java.util.Date(253370743269000L));
+        ngaymuon.setMinSelectableDate(new java.util.Date(-62135791131000L));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,13 +197,13 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgayHH, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgayM, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaThe, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(txtSoTien, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(txtMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(txtMaThe, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(ngayhethan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ngaymuon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,15 +223,15 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNgayM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(ngaymuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNgayHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ngayhethan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -244,11 +250,6 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
         btnThemMT.setText("Thêm");
         btnThemMT.setPreferredSize(new java.awt.Dimension(90, 30));
-        btnThemMT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemMTActionPerformed(evt);
-            }
-        });
 
         btnTimKiemMT.setText("Tìm Kiếm");
         btnTimKiemMT.setPreferredSize(new java.awt.Dimension(90, 30));
@@ -326,12 +327,12 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_view;
+    private com.toedter.calendar.JDateChooser ngayhethan;
+    private com.toedter.calendar.JDateChooser ngaymuon;
     private javax.swing.JTextField txtMaGD;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtMaThe;
-    private javax.swing.JTextField txtNgayHH;
-    private javax.swing.JTextField txtNgayM;
     private javax.swing.JTextField txtNgayTra;
     private javax.swing.JTextField txtSoTien;
     private javax.swing.JTextField txtTimKiemmt;
