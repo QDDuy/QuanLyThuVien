@@ -73,10 +73,8 @@ public class QuanLyNhapSach {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
-     @Override
-    public String toString() {
-        return "QuanLyNhap{" + "MaPhieuNhap=" + maphieunhap + ", MaSach=" + masach + ", n=" + diachi + ", SDT=" + SDT + ", cccd=" + cccd + ", email=" + email + '}';
-    }
+
+    
     // xu ly su kien them, sua, xoa, tim kiem, hiển thị
     public List<QuanLyDocGia> getList(){
         Connection conn = DatabaseConnection.getConnection();

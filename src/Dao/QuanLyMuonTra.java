@@ -6,7 +6,7 @@ package Dao;
 
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -65,8 +65,6 @@ public class QuanLyMuonTra {
     }
 
     public int getSotien() {
-        int so_ngaymuon = (int) (this.ngayhethan.getTime() - this.ngaymuon.getTime()) / (24 * 60 * 60 * 1000);
-        sotien = so_ngaymuon * 10000;
         return sotien;
     }
     
@@ -129,6 +127,7 @@ public class QuanLyMuonTra {
             String sql = "SELECT * FROM MuonTra WHERE MaGiaoDich = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, muontra.getMaGiaodich());
+            ps.execute();
             ResultSet rs = ps.executeQuery();
 
             // Nếu mã Thẻ đã có trong bảng, hiển thị thông báo lỗi
@@ -137,15 +136,28 @@ public class QuanLyMuonTra {
             return 0;
             }
             
-            
-            sql = "INSERT INTO GiaoDich(MaGiaoDich,MaThe, MaSach, NgayMuon, NgayHetHan, NgayTraSach) values(?, ? , ?, ?, ?, ?, ?) ";
-            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            sql = "SELECT * FROM DocGia WHERE MaThe = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, muontra.getMathe());
+
+            rs = ps.executeQuery();
+
+            // Nếu mã thẻ không tồn tại trong bảng độc giả, hiển thị thông báo lỗi
+            if (!rs.next()) {
+            JOptionPane.showMessageDialog(null, "Mã thẻ không tồn tại!");
+            return 0;
+            }
+            java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
+            java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
+            java.sql.Date ngayTra = new java.sql.Date(muontra.getNgaytrasach().getTime());
+            sql = "INSERT INTO Muontra values(?, ? , ?, ?, ?, ?, ?) ";
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, muontra.getMaGiaodich());
             ps.setInt(2, muontra.getMathe());
             ps.setInt(3, muontra.getMasach());
-            ps.setDate(4, muontra.getNgaymuon());
-            ps.setDate(5, muontra.getNgayhethan());
-            ps.setDate(6, muontra.getNgaytrasach());
+            ps.setDate(4, ngayMuon);
+            ps.setDate(5, ngayHetHan);
+            ps.setDate(6, ngayTra);
             ps.setDouble(7,muontra.getSotien());
             ps.execute();
             rs = ps.getGeneratedKeys();
@@ -162,19 +174,22 @@ public class QuanLyMuonTra {
     }
     
     
-    public int edit(QuanLyMuonTra muonTra) {
+    public int edit(QuanLyMuonTra muontra) {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
+            java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
+            java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
+            java.sql.Date ngayTra = new java.sql.Date(muontra.getNgaytrasach().getTime());
             String sql = "UPDATE MuonTra SET  MaThe = ?, MaSach = ?, NgayMuon = ?, NgayHetHan = ?,NgayTraSach = ?,SoTien=? WHERE MaGiaoDich = ?";
             PreparedStatement ps = conn.prepareStatement(sql);    
-            ps.setInt(1, muonTra.getMathe());
-            ps.setInt(2, muonTra.getMasach());
-            ps.setDate(3, muonTra.getNgaymuon());
-            ps.setDate(4, muonTra.getNgayhethan());
-            ps.setDate(5, muonTra.getNgaytrasach());
-            ps.setDouble(6, muonTra.getSotien());
-            ps.setInt(7,muonTra.getMaGiaodich() );
+            ps.setInt(1, muontra.getMathe());
+            ps.setInt(2, muontra.getMasach());
+            ps.setDate(3,  ngayMuon);
+            ps.setDate(4,  ngayHetHan);
+            ps.setDate(5,  ngayHetHan);
+            ps.setDouble(6, muontra.getSotien());
+            ps.setInt(7,muontra.getMaGiaodich() );
             ps.execute();       
             return 1;
         } catch (Exception e) {
@@ -186,7 +201,7 @@ public class QuanLyMuonTra {
     try {
         Connection conn = DatabaseConnection.getConnection();
         // Sử dụng dữ liệu này để thực hiện hành động xóa
-        String sql = "DELETE FROM DocGia WHERE MaThe = ?";
+        String sql = "DELETE FROM Muontra WHERE MaThe = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, muonTra.getMaGiaodich());
         ps.execute();

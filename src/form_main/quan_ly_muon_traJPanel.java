@@ -5,7 +5,7 @@
 package form_main;
 
 import Dao.QuanLyMuonTra;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.RowFilter;
@@ -106,8 +106,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     public QuanLyMuonTra getmodel_create() throws Exception{
         QuanLyMuonTra muonTra = new QuanLyMuonTra();
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
-        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
-        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));        
+        muonTra.setMathe(Integer.parseInt(txtMaSach.getText()));
+        muonTra.setMasach(Integer.parseInt(txtMaSach.getText()));        
         muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
         muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
         muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
@@ -118,8 +118,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     public QuanLyMuonTra getmodel_update() throws Exception{
         QuanLyMuonTra muonTra = new QuanLyMuonTra();
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
-        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
-        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));        
+        muonTra.setMathe(Integer.parseInt(txtMaSach.getText()));
+        muonTra.setMasach(Integer.parseInt(txtMaSach.getText()));      
         muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
         muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
         muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
