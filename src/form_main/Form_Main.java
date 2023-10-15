@@ -31,7 +31,7 @@ public class Form_Main extends javax.swing.JFrame {
     public Form_Main() {
         initComponents();
         Hieuung hieu_ung = new Hieuung(jPanel_view);
-       
+        hieu_ung.setView(jPanel_docgia, quanly_docgia);
         List<danhmuc> list = new ArrayList<>();
         list.add(new danhmuc("quan_ly_doc_gia", jPanel_docgia, quanly_docgia));
         list.add(new danhmuc("quan_ly_sach", jPanel_sach, quanlysach));

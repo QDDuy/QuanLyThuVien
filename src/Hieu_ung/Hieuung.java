@@ -39,8 +39,8 @@ public class Hieuung {
     }
     public void setView(JPanel jpn_sach, JLabel jlb_sach){
         Select = "Quan ly sach";
-        jpn_sach.setBackground(new Color(204, 206, 107) );
-        jlb_sach.setBackground(new Color(204, 198, 169) );
+        jpn_sach.setBackground(new Color(217,235,255) );
+        jlb_sach.setBackground(new Color(217, 235, 255) );
         jpn_view.removeAll();
         jpn_view.setLayout(new BorderLayout());
         jpn_view.add(new quan_ly_doc_giaJPanel());
