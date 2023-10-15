@@ -5,7 +5,10 @@
         <group>
             <file>file:/D:/GitHub/QuanLyThuVien/src/form_main/quan_ly_nhapJPanel.java</file>
             <file>file:/D:/GitHub/QuanLyThuVien/src/form_main/quan_ly_nguoi_dungJPanel.java</file>
+            <file>file:/D:/GitHub/QuanLyThuVien/src/Dao/QuanLyDocGia.java</file>
+            <file>file:/D:/GitHub/QuanLyThuVien/src/form_main/Form_Main.java</file>
             <file>file:/D:/GitHub/QuanLyThuVien/src/form_main/quan_ly_doc_giaJPanel.java</file>
+            <file>file:/D:/GitHub/QuanLyThuVien/src/Dao/QuanLyNhapSach.java</file>
         </group>
     </open-files>
 </project-private>

@@ -343,11 +343,21 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
         pos = this.jTable_view.getSelectedRow();
         view();
     }//GEN-LAST:event_jTable_viewMouseClicked
+    public void refreshTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable_view.getModel();
+    model.setRowCount(0); // Xóa tất cả các dòng hiện tại trong bảng
+
+    List<QuanLyDocGia> updatedList = new QuanLyDocGia().getList(); // Lấy danh sách mới từ cơ sở dữ liệu
+    for (QuanLyDocGia docGia : updatedList) {
+        model.addRow(new Object[]{docGia.getMaTHe(), docGia.getTenKH(), docGia.getDiachi(), docGia.getSDT(), docGia.getCccd(), docGia.getEmail()});
+    }
+}
 
     private void btnThemDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDocGiaActionPerformed
         // TODO add your handling code here:
          try {
             QuanLyDocGia docGia = getmodel_create();
+            refreshTable();
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
@@ -358,6 +368,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             QuanLyDocGia docGia = getmodel_update();
+            refreshTable();
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
@@ -367,6 +378,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
                 try {
             QuanLyDocGia docGia = getmodel_delete();
+            refreshTable();
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
