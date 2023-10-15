@@ -5,6 +5,7 @@
 package form_main;
 
 import Dao.QuanLyMuonTra;
+import java.sql.Date;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.RowFilter;
@@ -31,8 +32,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_muon_traJPanel() {
         initComponents();
-            view();
-            table_view();
+        view();
+        table_view();
         
         this.jTable_view.setAutoCreateRowSorter(true);
 
@@ -95,8 +96,40 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         this.txtMaSach.setText(Integer.toString(muonTra.getMasach()));
         this.ngaymuon.setDate(muonTra.getNgaymuon());
         this.ngayhethan.setDate(muonTra.getNgayhethan());
+        this.ngaytra.setDate(muonTra.getNgaytrasach());
         this.txtSoTien.setText(Integer.toString(muonTra.getSotien()));
         
+    }
+    
+    public QuanLyMuonTra getmodel_create() throws Exception{
+        QuanLyMuonTra muonTra = new QuanLyMuonTra();
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));        
+        muonTra.setNgaymuon((Date) ngaymuon.getDate());
+        muonTra.setNgayhethan((Date) ngayhethan.getDate());
+        muonTra.setNgaytrasach((Date) ngaytra.getDate());
+        muonTra.setSotien(Integer.parseInt(txtSoTien.getText()));
+        muonTra.create(muonTra);
+        return muonTra;
+    }
+    public QuanLyMuonTra getmodel_update() throws Exception{
+        QuanLyMuonTra muonTra = new QuanLyMuonTra();
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));        
+        muonTra.setNgaymuon((Date) ngaymuon.getDate());
+        muonTra.setNgayhethan((Date) ngayhethan.getDate());
+        muonTra.setNgaytrasach((Date) ngaytra.getDate());
+        muonTra.setSotien(Integer.parseInt(txtSoTien.getText()));
+        muonTra.edit(muonTra);
+        return muonTra;
+    }
+    public QuanLyMuonTra getmodel_delete() throws Exception{
+        QuanLyMuonTra muonTra = new QuanLyMuonTra();
+        muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
+        muonTra.delete(muonTra);
+        return muonTra;
     }
 
     public void table_view(){
@@ -104,6 +137,15 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         model.setNumRows(0);
         
         for(QuanLyMuonTra x : list){
+            model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
+        }
+    }
+     public void refreshTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable_view.getModel();
+        model.setRowCount(0); // Xóa tất cả các dòng hiện tại trong bảng
+
+        List<QuanLyMuonTra> updatedList = new QuanLyMuonTra().getList(); // Lấy danh sách mới từ cơ sở dữ liệu
+        for (QuanLyMuonTra x : updatedList) {
             model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
         }
     }
@@ -118,7 +160,6 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         txtMaGD = new javax.swing.JTextField();
         txtMaThe = new javax.swing.JTextField();
         txtMaSach = new javax.swing.JTextField();
-        txtNgayTra = new javax.swing.JTextField();
         txtSoTien = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -129,6 +170,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         ngayhethan = new com.toedter.calendar.JDateChooser();
         ngaymuon = new com.toedter.calendar.JDateChooser();
+        ngaytra = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         btnXoaMT = new javax.swing.JButton();
         btnUpdateMT = new javax.swing.JButton();
@@ -143,13 +185,12 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 "Mã giao dịch", "Mã Thẻ", "Mã Sách", "Ngày Mượn", "Ngày Hết Hạn", "Ngày Trả Sách", "Số Tiền"
             }
         ));
-        jScrollPane1.setViewportView(jTable_view);
-
-        txtMaGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaGDActionPerformed(evt);
+        jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_viewMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(jTable_view);
 
         jLabel1.setText("Mã GD :");
 
@@ -165,13 +206,15 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Số Tiền :");
 
-        ngayhethan.setDateFormatString("dd/mm/yyyy");
+        ngayhethan.setDateFormatString("yyyy/MM/dd");
         ngayhethan.setMaxSelectableDate(new java.util.Date(253370743269000L));
         ngayhethan.setMinSelectableDate(new java.util.Date(-62135791131000L));
 
-        ngaymuon.setDateFormatString("dd/mm/yyyy");
+        ngaymuon.setDateFormatString("yyyy/MM/dd");
         ngaymuon.setMaxSelectableDate(new java.util.Date(253370743269000L));
         ngaymuon.setMinSelectableDate(new java.util.Date(-62135791131000L));
+
+        ngaytra.setDateFormatString("yyyy/MM/dd");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,12 +241,12 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtSoTien, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtMaThe, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(ngayhethan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ngaymuon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(ngaymuon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ngaytra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -231,11 +274,11 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ngayhethan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(33, 33, 33)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(ngaytra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -244,12 +287,27 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
         btnXoaMT.setText("Xóa");
         btnXoaMT.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnXoaMT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaMTActionPerformed(evt);
+            }
+        });
 
         btnUpdateMT.setText("Update");
         btnUpdateMT.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnUpdateMT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateMTActionPerformed(evt);
+            }
+        });
 
         btnThemMT.setText("Thêm");
         btnThemMT.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnThemMT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMTActionPerformed(evt);
+            }
+        });
 
         btnTimKiemMT.setText("Tìm Kiếm");
         btnTimKiemMT.setPreferredSize(new java.awt.Dimension(90, 30));
@@ -304,12 +362,42 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMaGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaGDActionPerformed
-    }//GEN-LAST:event_txtMaGDActionPerformed
-
     private void btnThemMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMTActionPerformed
         // TODO add your handling code here:
+        try {
+            QuanLyMuonTra muonTra = getmodel_create();
+            refreshTable();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
     }//GEN-LAST:event_btnThemMTActionPerformed
+
+    private void jTable_viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_viewMouseClicked
+        // TODO add your handling code here:
+         pos = this.jTable_view.getSelectedRow();
+         view();
+    }//GEN-LAST:event_jTable_viewMouseClicked
+
+    private void btnXoaMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaMTActionPerformed
+        // TODO add your handling code here:
+        try {
+            QuanLyMuonTra muonTra = getmodel_delete();
+            refreshTable();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+        
+    }//GEN-LAST:event_btnXoaMTActionPerformed
+
+    private void btnUpdateMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMTActionPerformed
+        // TODO add your handling code here:
+        try {
+            QuanLyMuonTra muonTra = getmodel_update();
+            refreshTable();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+    }//GEN-LAST:event_btnUpdateMTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -330,10 +418,10 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable_view;
     private com.toedter.calendar.JDateChooser ngayhethan;
     private com.toedter.calendar.JDateChooser ngaymuon;
+    private com.toedter.calendar.JDateChooser ngaytra;
     private javax.swing.JTextField txtMaGD;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtMaThe;
-    private javax.swing.JTextField txtNgayTra;
     private javax.swing.JTextField txtSoTien;
     private javax.swing.JTextField txtTimKiemmt;
     // End of variables declaration//GEN-END:variables

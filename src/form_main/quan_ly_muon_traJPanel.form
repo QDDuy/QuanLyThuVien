@@ -103,6 +103,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_viewMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -135,12 +138,12 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNgayTra" pref="140" max="32767" attributes="0"/>
                               <Component id="txtSoTien" pref="140" max="32767" attributes="0"/>
                               <Component id="txtMaSach" alignment="0" pref="140" max="32767" attributes="0"/>
                               <Component id="txtMaThe" pref="140" max="32767" attributes="0"/>
                               <Component id="ngayhethan" alignment="0" max="32767" attributes="0"/>
                               <Component id="ngaymuon" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ngaytra" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -178,12 +181,12 @@
                       <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="ngayhethan" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNgayTra" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="ngaytra" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtSoTien" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -197,15 +200,10 @@
         <Component class="javax.swing.JTextField" name="txtTimKiemmt">
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaGD">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaGDActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaThe">
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaSach">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNgayTra">
         </Component>
         <Component class="javax.swing.JTextField" name="txtSoTien">
         </Component>
@@ -246,7 +244,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="ngayhethan">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd/mm/yyyy"/>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
             <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.beaninfo.editors.DateEditor">
               <SerializedValue value="-84,-19,0,5,115,114,0,14,106,97,118,97,46,117,116,105,108,46,68,97,116,101,104,106,-127,1,75,89,116,25,3,0,0,120,112,119,8,0,0,-26,112,121,38,38,-120,120"/>
             </Property>
@@ -257,13 +255,18 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="ngaymuon">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd/mm/yyyy"/>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
             <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.beaninfo.editors.DateEditor">
               <SerializedValue value="-84,-19,0,5,115,114,0,14,106,97,118,97,46,117,116,105,108,46,68,97,116,101,104,106,-127,1,75,89,116,25,3,0,0,120,112,119,8,0,0,-26,112,121,38,38,-120,120"/>
             </Property>
             <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.beaninfo.editors.DateEditor">
               <SerializedValue value="-84,-19,0,5,115,114,0,14,106,97,118,97,46,117,116,105,108,46,68,97,116,101,104,106,-127,1,75,89,116,25,3,0,0,120,112,119,8,-1,-1,-57,124,-30,61,-26,-120,120"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="ngaytra">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -309,6 +312,9 @@
               <Dimension value="[90, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaMTActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnUpdateMT">
           <Properties>
@@ -317,6 +323,9 @@
               <Dimension value="[90, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateMTActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnThemMT">
           <Properties>
@@ -325,6 +334,9 @@
               <Dimension value="[90, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemMTActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTimKiemMT">
           <Properties>
