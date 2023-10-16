@@ -18,7 +18,7 @@ public class main {
     
     public static void main(String[] args) {
         
-       new DangNhap().setVisible(true);
+       new form_main.Form_Main().setVisible(true);
     }
     
     

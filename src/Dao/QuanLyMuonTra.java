@@ -158,7 +158,7 @@ public class QuanLyMuonTra {
             ps.setDate(4, ngayMuon);
             ps.setDate(5, ngayHetHan);
             ps.setDate(6, ngayTra);
-            ps.setDouble(7,muontra.getSotien());
+            ps.setInt(7,muontra.getSotien());
             ps.execute();
             rs = ps.getGeneratedKeys();
             int generatedKey = 0;

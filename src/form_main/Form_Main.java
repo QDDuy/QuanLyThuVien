@@ -302,7 +302,7 @@ public class Form_Main extends javax.swing.JFrame {
         jPanel_view.setLayout(jPanel_viewLayout);
         jPanel_viewLayout.setHorizontalGroup(
             jPanel_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1070, Short.MAX_VALUE)
+            .addGap(0, 1076, Short.MAX_VALUE)
         );
         jPanel_viewLayout.setVerticalGroup(
             jPanel_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,8 +321,8 @@ public class Form_Main extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(316, 316, 316))
                     .addGroup(jPanel_FrameLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel_view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel_view, javax.swing.GroupLayout.DEFAULT_SIZE, 1076, Short.MAX_VALUE))))
         );
         jPanel_FrameLayout.setVerticalGroup(
             jPanel_FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

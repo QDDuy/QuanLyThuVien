@@ -198,7 +198,6 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 "Mã Thẻ", "Họ tên", "Địa Chỉ", "Số Điện Thoại", "Số CCCD", "Email"
             }
         ));
-        jTable_view.setFillsViewportHeight(true);
         jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_viewMouseClicked(evt);
@@ -279,7 +278,8 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        btnThemDocGia.setText("Thêm");
+        btnThemDocGia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        btnThemDocGia.setText("Insert");
         btnThemDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
         btnThemDocGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,7 +287,8 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoaDocGia.setText("Xóa");
+        btnXoaDocGia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        btnXoaDocGia.setText("Delete");
         btnXoaDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
         btnXoaDocGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +296,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnUpdatDocGia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         btnUpdatDocGia.setText("Update");
         btnUpdatDocGia.setPreferredSize(new java.awt.Dimension(90, 30));
         btnUpdatDocGia.addActionListener(new java.awt.event.ActionListener() {

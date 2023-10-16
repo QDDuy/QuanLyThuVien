@@ -178,7 +178,6 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         btnXoaMT = new javax.swing.JButton();
         btnUpdateMT = new javax.swing.JButton();
         btnThemMT = new javax.swing.JButton();
-        btnTimKiemMT = new javax.swing.JButton();
 
         jTable_view.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -284,7 +283,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28))
         );
 
-        btnXoaMT.setText("Xóa");
+        btnXoaMT.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        btnXoaMT.setText("delete");
         btnXoaMT.setPreferredSize(new java.awt.Dimension(90, 30));
         btnXoaMT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +292,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnUpdateMT.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         btnUpdateMT.setText("Update");
         btnUpdateMT.setPreferredSize(new java.awt.Dimension(90, 30));
         btnUpdateMT.addActionListener(new java.awt.event.ActionListener() {
@@ -300,16 +301,14 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnThemMT.setText("Thêm");
+        btnThemMT.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        btnThemMT.setText("Insert");
         btnThemMT.setPreferredSize(new java.awt.Dimension(90, 30));
         btnThemMT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMTActionPerformed(evt);
             }
         });
-
-        btnTimKiemMT.setText("Tìm Kiếm");
-        btnTimKiemMT.setPreferredSize(new java.awt.Dimension(90, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -319,21 +318,18 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 .addGap(199, 199, 199)
                 .addComponent(btnThemMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104)
-                .addComponent(btnXoaMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXoaMT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119)
                 .addComponent(btnUpdateMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTimKiemMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
+                .addContainerGap(404, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoaMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoaMT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdateMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiemMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
@@ -401,7 +397,6 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThemMT;
-    private javax.swing.JButton btnTimKiemMT;
     private javax.swing.JButton btnUpdateMT;
     private javax.swing.JButton btnXoaMT;
     private javax.swing.JLabel jLabel1;
