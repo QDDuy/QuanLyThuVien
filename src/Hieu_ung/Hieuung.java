@@ -80,9 +80,6 @@ public class Hieuung {
                 case "quan_ly_muon_tra":
                     node = new quan_ly_muon_traJPanel();
                     break;
-                case "quan_ly_tre_han":
-                    node = new quan_ly_tre_hanJPanel();
-                    break;
                 case "quan_ly_nhap_sach":
                     node = new  quan_ly_nhapJPanel();
                     break;
