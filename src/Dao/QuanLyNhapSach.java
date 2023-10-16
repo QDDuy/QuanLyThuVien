@@ -6,7 +6,7 @@ package Dao;
 
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -81,7 +81,7 @@ public class QuanLyNhapSach {
     // xu ly su kien them, sua, xoa, tim kiem, hiển thị
     public List<QuanLyNhapSach> getList(){
         Connection conn = DatabaseConnection.getConnection();
-        String sql = "select * from DocGia";
+        String sql = "select * from PhieuNhap";
         List<QuanLyNhapSach> list = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -116,13 +116,13 @@ public class QuanLyNhapSach {
             return 0;
             }
             
-            
+            java.sql.Date ngayNhap = new java.sql.Date(nhapSach.getNgaynhap().getTime());
             sql = "INSERT INTO PhieuNhap(MaPhieuNhap, MaSach, NguoiNhap, NgayNhap, SoLuong) values(?, ? , ?, ?, ?) ";
             ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, nhapSach.getMaphieunhap());
             ps.setInt(2, nhapSach.getMasach());
             ps.setString(3, nhapSach.getNguoinhap());
-            ps.setDate(4, nhapSach.getNgaynhap());
+            ps.setDate(4, ngayNhap); 
             ps.setInt(5, nhapSach.getSoluong());
             ps.execute();
             rs = ps.getGeneratedKeys();
@@ -143,13 +143,14 @@ public class QuanLyNhapSach {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
+            java.sql.Date ngayNhap = new java.sql.Date(nhapSach.getNgaynhap().getTime());
             String sql = "UPDATE PhieuNhap SET MaSach = ?, NguoiNhap = ?, NgayNhap = ?, SoLuong = ? WHERE MaPhieuNhap = ?";
             PreparedStatement ps = conn.prepareStatement(sql);    
-            ps.setInt(1, nhapSach.getMaphieunhap());
-            ps.setInt(2, nhapSach.getMasach());
-            ps.setString(3, nhapSach.getNguoinhap());
-            ps.setDate(4, nhapSach.getNgaynhap());
-            ps.setInt(5, nhapSach.getSoluong());
+            ps.setInt(5, nhapSach.getMaphieunhap());
+            ps.setInt(1, nhapSach.getMasach());
+            ps.setString(2, nhapSach.getNguoinhap());
+            ps.setDate(3, ngayNhap);
+            ps.setInt(4 , nhapSach.getSoluong());
             ps.execute();       
             return 1;
         } catch (Exception e) {
