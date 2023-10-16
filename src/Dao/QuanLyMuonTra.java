@@ -201,7 +201,7 @@ public class QuanLyMuonTra {
     try {
         Connection conn = DatabaseConnection.getConnection();
         // Sử dụng dữ liệu này để thực hiện hành động xóa
-        String sql = "DELETE FROM Muontra WHERE MaThe = ?";
+        String sql = "DELETE FROM Muontra WHERE MaGiaoDich = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, muonTra.getMaGiaodich());
         ps.execute();
