@@ -187,7 +187,7 @@ public class QuanLyMuonTra {
             ps.setInt(2, muontra.getMasach());
             ps.setDate(3,  ngayMuon);
             ps.setDate(4,  ngayHetHan);
-            ps.setDate(5,  ngayHetHan);
+            ps.setDate(5,  ngayTra);
             ps.setDouble(6, muontra.getSotien());
             ps.setInt(7,muontra.getMaGiaodich() );
             ps.execute();       
