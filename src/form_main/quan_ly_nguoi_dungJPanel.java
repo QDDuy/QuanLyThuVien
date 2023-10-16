@@ -4,15 +4,131 @@
  */
 package form_main;
 
+import Dao.QuanLyNguoiDung;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 
 public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
 
-   
+   List<QuanLyNguoiDung> list = new QuanLyNguoiDung().getList();
+    QuanLyNguoiDung nguoiDung;
+    private static int pos = 0;
+    private boolean isAsc = true;
+    private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_nguoi_dungJPanel() {
         initComponents();
+        view();
+        table_view();
+        
+        this.jTable_view.setAutoCreateRowSorter(true);
+
+        // Thêm phương thức sort() cho bảng
+        this.jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Kiểm tra xem người dùng có click chuột vào cột Ho va ten đệm hay không
+                if (evt.getSource() == jTable_view && evt.getClickCount() == 1 && evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+                    // Lấy cột mà người dùng click chuột
+                    int columnIndex = jTable_view.getColumnModel().getColumnIndexAtX(evt.getX());
+                    // Kiểm tra xem cột đó có phải là cột Ho va ten đệm hay không
+                    if (columnIndex == 2) {
+                        // Sắp xếp dữ liệu trong bảng theo thứ tự tăng dần hoặc giảm dần
+                        sort();
+                    }
+                }
+            }
+        });
+        
+        
+        tableRowSorter = new TableRowSorter<>((DefaultTableModel) this.jTable_view.getModel());
+        this.jTable_view.setRowSorter(tableRowSorter);
+
+        // Thêm sự kiện keyTyped() cho ô textbox jsearch
+        this.txtSearchND.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                // Lấy giá trị được nhập vào ô textbox jsearch
+                String text = txtSearchND.getText();
+
+                // Sử dụng phương thức setRowFilter() của đối tượng RowSorter để lọc dữ liệu trong bảng
+                tableRowSorter.setRowFilter(RowFilter.regexFilter(text));
+            }
+        });
+    }
+     private void sort() {
+        // Lấy mô hình của bảng
+        DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
+
+        // Tạo một đối tượng Comparator để so sánh dữ liệu trong cột Ho va ten đệm
+        Comparator<QuanLyNguoiDung> comparator = (o1, o2) -> {
+            if (this.isAsc) {
+                return o1.getTennguoidung().compareToIgnoreCase(o2.getTennguoidung());
+            } else {
+                return o2.getTennguoidung().compareToIgnoreCase(o1.getTennguoidung());
+            }
+        };
+
+        
+        
+
+        // Đổi trạng thái sắp xếp của cột Ho va ten đệm
+        this.isAsc = !this.isAsc;
+    }
+    
+    public void view(){
+        nguoiDung = list.get(pos);
+        this.txtMaND.setText(Integer.toString(nguoiDung.getManguoidung()));
+        this.txtTenND.setText(nguoiDung.getTennguoidung());
+        this.txtMatKhau.setText(nguoiDung.getMatkhau());
+        this.txtChucVu.setText(nguoiDung.getChucvu());
+        
     }
 
-  
+    public void table_view(){
+        DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
+        model.setNumRows(0);
+        
+        for(QuanLyNguoiDung x : list){
+            model.addRow(new Object[]{ x.getManguoidung(), x.getTennguoidung(), x.getMatkhau(), x.getChucvu()});
+        }
+    }
+    public void refreshTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable_view.getModel();
+        model.setRowCount(0); // Xóa tất cả các dòng hiện tại trong bảng
+
+        List<QuanLyNguoiDung> updatedList = new QuanLyNguoiDung().getList(); // Lấy danh sách mới từ cơ sở dữ liệu
+        for (QuanLyNguoiDung x : updatedList) {
+            model.addRow(new Object[]{x.getManguoidung(), x.getTennguoidung(), x.getMatkhau(), x.getChucvu()});
+        }
+    }
+    public QuanLyNguoiDung getmodel_create() throws Exception{
+        QuanLyNguoiDung nguoiDung = new QuanLyNguoiDung();
+        nguoiDung.setManguoidung(Integer.parseInt(txtMaND.getText()));
+        nguoiDung.setTennguoidung(txtTenND.getText());
+        nguoiDung.setMatkhau(txtMatKhau.getText());
+        nguoiDung.setChucvu(txtChucVu.getText());
+        nguoiDung.create(nguoiDung);
+        return nguoiDung;
+    }
+    public QuanLyNguoiDung getmodel_update() throws Exception{
+        QuanLyNguoiDung nguoiDung = new QuanLyNguoiDung();
+        nguoiDung.setManguoidung(Integer.parseInt(txtMaND.getText()));
+        nguoiDung.setTennguoidung(txtTenND.getText());
+        nguoiDung.setMatkhau(txtMatKhau.getText());
+        nguoiDung.setChucvu(txtChucVu.getText());
+        nguoiDung.edit(nguoiDung);
+        return nguoiDung;
+    }
+    public QuanLyNguoiDung getmodel_delete() throws Exception{
+        QuanLyNguoiDung nguoiDung = new QuanLyNguoiDung();
+        nguoiDung.setManguoidung(Integer.parseInt(txtMaND.getText()));
+        nguoiDung.delete(nguoiDung);
+        return nguoiDung;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,7 +139,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
         btnUpdatePN = new javax.swing.JButton();
         btnTimKiemPN = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_view = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtMaND = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JTextField();
@@ -39,7 +155,6 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
         btnThemND = new javax.swing.JButton();
         btnXoaND = new javax.swing.JButton();
         btnUpdateND = new javax.swing.JButton();
-        btnTimKiemND = new javax.swing.JButton();
 
         btnThemPN.setText("Thêm");
         btnThemPN.setPreferredSize(new java.awt.Dimension(90, 30));
@@ -82,7 +197,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1070, 570));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_view.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -90,7 +205,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 "Mã Người Dùng", "Tên Người Dùng", "Mật Khẩu", "Chức Vụ"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_view);
 
         jLabel1.setText("Search");
 
@@ -155,15 +270,27 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
 
         btnThemND.setText("Thêm");
         btnThemND.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnThemND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemNDActionPerformed(evt);
+            }
+        });
 
         btnXoaND.setText("Xóa");
         btnXoaND.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnXoaND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaNDActionPerformed(evt);
+            }
+        });
 
         btnUpdateND.setText("Update");
         btnUpdateND.setPreferredSize(new java.awt.Dimension(90, 30));
-
-        btnTimKiemND.setText("Tìm kiếm");
-        btnTimKiemND.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnUpdateND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateNDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -176,9 +303,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 .addComponent(btnXoaND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(btnUpdateND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143)
-                .addComponent(btnTimKiemND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,8 +312,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiemND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdateND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
 
@@ -198,7 +322,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -214,12 +338,46 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+      private void jTable_viewMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        pos = this.jTable_view.getSelectedRow();
+        view();
+    }                                        
+
+    private void btnThemNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNDActionPerformed
+        // TODO add your handling code here:
+        try {
+            QuanLyNguoiDung nguoiDung = getmodel_create();
+            refreshTable();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+    }//GEN-LAST:event_btnThemNDActionPerformed
+
+    private void btnXoaNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNDActionPerformed
+        // TODO add your handling code here:
+                try {
+            QuanLyNguoiDung nguoiDung = getmodel_delete();
+            refreshTable();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+    }//GEN-LAST:event_btnXoaNDActionPerformed
+
+    private void btnUpdateNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNDActionPerformed
+        // TODO add your handling code here:
+        try {
+            QuanLyNguoiDung nguoiDung = getmodel_update();
+            refreshTable();
+        } catch (Exception ex) {
+            System.out.println("Error" + ex);
+        }
+    }//GEN-LAST:event_btnUpdateNDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThemND;
     private javax.swing.JButton btnThemPN;
-    private javax.swing.JButton btnTimKiemND;
     private javax.swing.JButton btnTimKiemPN;
     private javax.swing.JButton btnUpdateND;
     private javax.swing.JButton btnUpdatePN;
@@ -234,7 +392,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_view;
     private javax.swing.JTextField txtChucVu;
     private javax.swing.JTextField txtMaND;
     private javax.swing.JTextField txtMatKhau;
