@@ -127,12 +127,12 @@ public class QuanLyNguoiDung {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
-            String sql = "UPDATE TaiKhoan SET TenNguoiDung = ?, MatKhau = ?, ChucVu = ? WHERE MaThe = ?";
+            String sql = "UPDATE TaiKhoan SET TenNguoiDung = ?, MatKhau = ?, ChucVu = ? WHERE MaNguoiDung = ?";
             PreparedStatement ps = conn.prepareStatement(sql);    
-            ps.setInt(1, nguoiDung.getManguoidung());
-            ps.setString(2, nguoiDung.getTennguoidung());
-            ps.setString(3, nguoiDung.getMatkhau());
-            ps.setString(4, nguoiDung.getChucvu());
+            ps.setInt(4, nguoiDung.getManguoidung());
+            ps.setString(1, nguoiDung.getTennguoidung());
+            ps.setString(2, nguoiDung.getMatkhau());
+            ps.setString(3, nguoiDung.getChucvu());
             ps.execute();       
             return 1;
         } catch (Exception e) {
@@ -144,7 +144,7 @@ public class QuanLyNguoiDung {
     try {
         Connection conn = DatabaseConnection.getConnection();
         // Sử dụng dữ liệu này để thực hiện hành động xóa
-        String sql = "DELETE FROM TaiKhoan WHERE MaThe = ?";
+        String sql = "DELETE FROM TaiKhoan WHERE MaNguoiDung = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, nguoiDung.getManguoidung());
         ps.execute();

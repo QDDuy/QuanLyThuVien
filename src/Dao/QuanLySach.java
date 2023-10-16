@@ -6,7 +6,7 @@ package Dao;
 
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -122,7 +122,7 @@ public class QuanLySach {
     
     public List<QuanLySach> getList(){
         Connection conn = DatabaseConnection.getConnection();
-        String sql = "select * from Muontra";
+        String sql = "select * from Sach";
         List<QuanLySach> list = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -162,15 +162,15 @@ public class QuanLySach {
             return 0;
             }
             
-            sql = "SELECT * FROM KeSach WHERE MaSach = MaKeSach ?";
+            sql = "SELECT * FROM KeSach WHERE MaKeSach = ?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, sach.getMakesach());
             ps.execute();
             rs = ps.executeQuery();
 
             // Nếu mã Thẻ đã có trong bảng, hiển thị thông báo lỗi
-            if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Mã kệ sách đã tồn tại!");
+            if (!rs.next()) {
+            JOptionPane.showMessageDialog(null, "Mã kệ sách không tồn tại!");
             return 0;
             }
             
@@ -183,7 +183,7 @@ public class QuanLySach {
             ps.setInt(1, sach.getMasach());
             ps.setInt(2, sach.getMakesach());
             ps.setString(3, sach.getTensach());
-            ps.setString(4, sach.getTensach());
+            ps.setString(4, sach.getTheloai());
             ps.setString(5, sach.getTacgia());
             ps.setInt(6, sach.getSoluong());
             ps.setDate(7, ngayXB);
@@ -208,15 +208,15 @@ public class QuanLySach {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
-            String sql = "SELECT * FROM KeSach WHERE MaSach = MaKeSach ?";
+            String sql = "SELECT * FROM KeSach WHERE MaKeSach = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, sach.getMakesach());
             ps.execute();
             ResultSet rs = ps.executeQuery();
 
             // Nếu mã Thẻ đã có trong bảng, hiển thị thông báo lỗi
-            if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Mã kệ sách đã tồn tại!");
+            if (!rs.next()) {
+            JOptionPane.showMessageDialog(null, "Mã kệ sách không tồn tại!");
             return 0;
             }
             
@@ -228,7 +228,7 @@ public class QuanLySach {
             ps.setInt(9, sach.getMasach());
             ps.setInt(1, sach.getMakesach());
             ps.setString(2, sach.getTensach());
-            ps.setString(3, sach.getTensach());
+            ps.setString(3, sach.getTheloai());
             ps.setString(4, sach.getTacgia());
             ps.setInt(5, sach.getSoluong());
             ps.setDate(6, ngayXB);
