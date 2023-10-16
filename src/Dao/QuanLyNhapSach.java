@@ -34,6 +34,9 @@ public class QuanLyNhapSach {
         this.soluong = soluong;
     }
 
+    public QuanLyNhapSach() {
+    }
+
     public int getMaphieunhap() {
         return maphieunhap;
     }
@@ -76,22 +79,21 @@ public class QuanLyNhapSach {
 
     
     // xu ly su kien them, sua, xoa, tim kiem, hiển thị
-    public List<QuanLyDocGia> getList(){
+    public List<QuanLyNhapSach> getList(){
         Connection conn = DatabaseConnection.getConnection();
         String sql = "select * from DocGia";
-        List<QuanLyDocGia> list = new ArrayList<>();
+        List<QuanLyNhapSach> list = new ArrayList<>();
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                QuanLyDocGia docgia = new QuanLyDocGia();
-                docgia.setMaTHe(rs.getInt("MaTHe"));
-                docgia.setTenKH(rs.getString("HoVaTenDem"));
-                docgia.setDiachi(rs.getString("DiaChi"));
-                docgia.setSDT(rs.getString("SoDienThoai"));
-                docgia.setCccd(rs.getString("SoCCCD"));
-                docgia.setEmail(rs.getString("Email"));
-                list.add(docgia);
+                QuanLyNhapSach nhapSach= new QuanLyNhapSach();
+                nhapSach.setMaphieunhap(rs.getInt("MaPhieuNhap"));
+                nhapSach.setMasach(rs.getInt("MaSach"));
+                nhapSach.setNguoinhap(rs.getString("NguoiNhap"));
+                nhapSach.setNgaynhap(rs.getDate("NgayNhap"));
+                nhapSach.setSoluong(rs.getInt("SoLuong"));
+                list.add(nhapSach);
             }
             ps.close();
         }catch(Exception e){
@@ -99,30 +101,29 @@ public class QuanLyNhapSach {
         }
         return list;
     }
-    public int create(QuanLyDocGia docGia) {
+    public int create(QuanLyNhapSach nhapSach) {
         try{
             Connection conn = DatabaseConnection.getConnection();
             // Kiểm tra xem mã Thẻ đã có trong bảng chưa
-            String sql = "SELECT * FROM DocGia WHERE MaThe = ?";
+            String sql = "SELECT * FROM PhieuNhap WHERE MaPhieuNhap = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, docGia.getMaTHe());
+            ps.setInt(1, nhapSach.getMaphieunhap());
             ResultSet rs = ps.executeQuery();
 
             // Nếu mã Thẻ đã có trong bảng, hiển thị thông báo lỗi
             if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Mã Thẻ đã tồn tại!");
+            JOptionPane.showMessageDialog(null, "Mã phiếu nhập đã tồn tại!");
             return 0;
             }
             
             
-            sql = "INSERT INTO DocGia(MaThe, HoVaTenDem, DiaChi, SoDienThoai, SoCCCD, Email) values(?, ? , ?, ?, ?, ?) ";
+            sql = "INSERT INTO PhieuNhap(MaPhieuNhap, MaSach, NguoiNhap, NgayNhap, SoLuong) values(?, ? , ?, ?, ?) ";
             ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, docGia.getMaTHe());
-            ps.setString(2, docGia.getTenKH());
-            ps.setString(3, docGia.getDiachi());
-            ps.setString(4, docGia.getSDT());
-            ps.setString(5, docGia.getCccd());
-            ps.setString(6, docGia.getEmail());
+            ps.setInt(1, nhapSach.getMaphieunhap());
+            ps.setInt(2, nhapSach.getMasach());
+            ps.setString(3, nhapSach.getNguoinhap());
+            ps.setDate(4, nhapSach.getNgaynhap());
+            ps.setInt(5, nhapSach.getSoluong());
             ps.execute();
             rs = ps.getGeneratedKeys();
             int generatedKey = 0;
@@ -138,18 +139,17 @@ public class QuanLyNhapSach {
     }
     
     
-    public int edit(QuanLyDocGia docGia) {
+    public int edit(QuanLyNhapSach nhapSach) {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
-            String sql = "UPDATE DocGia SET HoVaTenDem = ?, DiaChi = ?, SoDienThoai = ?, SoCCCD = ?, Email = ? WHERE MaThe = ?";
+            String sql = "UPDATE PhieuNhap SET MaSach = ?, NguoiNhap = ?, NgayNhap = ?, SoLuong = ? WHERE MaPhieuNhap = ?";
             PreparedStatement ps = conn.prepareStatement(sql);    
-            ps.setString(1, docGia.getTenKH());
-            ps.setString(2, docGia.getDiachi());
-            ps.setString(3, docGia.getSDT());
-            ps.setString(4, docGia.getCccd());
-            ps.setString(5, docGia.getEmail());
-            ps.setInt(6, docGia.getMaTHe());
+            ps.setInt(1, nhapSach.getMaphieunhap());
+            ps.setInt(2, nhapSach.getMasach());
+            ps.setString(3, nhapSach.getNguoinhap());
+            ps.setDate(4, nhapSach.getNgaynhap());
+            ps.setInt(5, nhapSach.getSoluong());
             ps.execute();       
             return 1;
         } catch (Exception e) {
@@ -157,13 +157,13 @@ public class QuanLyNhapSach {
         }
         return 0;
     }
-    public int delete(QuanLyDocGia docGia) {
+    public int delete(QuanLyNhapSach nhapSach) {
     try {
         Connection conn = DatabaseConnection.getConnection();
         // Sử dụng dữ liệu này để thực hiện hành động xóa
-        String sql = "DELETE FROM DocGia WHERE MaThe = ?";
+        String sql = "DELETE FROM PhieuNhap WHERE MaPhieuNhap = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, docGia.getMaTHe());
+        ps.setInt(1, nhapSach.getMaphieunhap());
         ps.execute();
         return 1;
     } catch (Exception e) {

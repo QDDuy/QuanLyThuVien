@@ -84,13 +84,13 @@ public class Hieuung {
                     node = new quan_ly_tre_hanJPanel();
                     break;
                 case "quan_ly_nhap_sach":
-                    node = new  quan_ly_nguoi_dungJPanel();
+                    node = new  quan_ly_nhapJPanel();
                     break;
                 case "thong_ke":
                     node = new quan_ly_thong_keJPanel();
                     break;
                 case "quan_ly_nguoi_dung":
-                    node = new quan_ly_nhapJPanel();
+                    node = new quan_ly_nguoi_dungJPanel();
                     break;
                 default:
                     break;
