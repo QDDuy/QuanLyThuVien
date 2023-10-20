@@ -1,7 +1,7 @@
 
 package form_main;
 
-import Dao.QuanLyNhapSach;
+import Contructor.QuanLyNhapSach;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.List;
@@ -75,6 +75,7 @@ public class quan_ly_nhapJPanel extends javax.swing.JPanel {
     }
     
     public void view(){
+        List<QuanLyNhapSach> list = new QuanLyNhapSach().getList();
         nhapSach = list.get(pos);
         this.txtMaPN.setText(Integer.toString(nhapSach.getMaphieunhap()));
         this.txtMaSach.setText(Integer.toString(nhapSach.getMasach()));

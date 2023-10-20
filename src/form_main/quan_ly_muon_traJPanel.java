@@ -4,7 +4,7 @@
  */
 package form_main;
 
-import Dao.QuanLyMuonTra;
+import Contructor.QuanLyMuonTra;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.List;
@@ -29,7 +29,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
 
     List<QuanLyMuonTra> list = new QuanLyMuonTra().getList();
     QuanLyMuonTra muonTra;
-    private static int pos = 0;
+    private int pos = 0;
     private boolean isAsc = true;
     private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_muon_traJPanel() {
@@ -92,6 +92,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     }
     
     public void view(){
+        List<QuanLyMuonTra> list = new QuanLyMuonTra().getList();
         muonTra = list.get(pos);
         this.txtMaGD.setText(Integer.toString(muonTra.getMaGiaodich()));
         this.txtMaThe.setText(Integer.toString(muonTra.getMathe()));
@@ -102,6 +103,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         this.txtSoTien.setText(Double.toString(muonTra.getSotien()));
         
     }
+    
     
     public QuanLyMuonTra getmodel_create() throws Exception{
         QuanLyMuonTra muonTra = new QuanLyMuonTra();
@@ -362,6 +364,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         try {
             QuanLyMuonTra muonTra = getmodel_create();
             refreshTable();
+            view();
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
@@ -378,6 +381,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         try {
             QuanLyMuonTra muonTra = getmodel_delete();
             refreshTable();
+            view();
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
@@ -389,6 +393,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         try {
             QuanLyMuonTra muonTra = getmodel_update();
             refreshTable();
+            view();
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }

@@ -4,7 +4,7 @@
  */
 package form_main;
 
-import Dao.QuanLyDocGia;
+import Contructor.QuanLyDocGia;
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -99,6 +99,7 @@ public class quan_ly_doc_giaJPanel extends javax.swing.JPanel {
     }
     
     public void view(){
+        List<QuanLyDocGia> list = new QuanLyDocGia().getList();
         DocGia = list.get(pos);
         this.txtMaThe.setText(Integer.toString(DocGia.getMaTHe()));
         this.txtHoTen.setText(DocGia.getTenKH());

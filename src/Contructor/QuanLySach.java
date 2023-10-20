@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Dao;
+package Contructor;
 
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
@@ -244,9 +244,25 @@ public class QuanLySach {
     public int delete(QuanLySach sach) {
     try {
         Connection conn = DatabaseConnection.getConnection();
-        // Sử dụng dữ liệu này để thực hiện hành động xóa
-        String sql = "DELETE FROM Sach WHERE MaSach = ?";
+        // Kiểm tra xem có cơ sở dữ liệu nào đang sử dụng khóa ngoại bảng này không
+        String sql = "SELECT * FROM Muontra WHERE MaSach = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, sach.getMasach());
+            ps.execute();
+            ResultSet rs = ps.executeQuery();
+
+            // Nếu mã Thẻ đã có trong bảng, hiển thị thông báo lỗi
+            if (rs.next()) {
+            JOptionPane.showMessageDialog(null, "Mã sách đang được sử dụng!");
+            return 0;
+            }
+        
+        
+        
+        
+        // Sử dụng dữ liệu này để thực hiện hành động xóa
+        sql = "DELETE FROM Sach WHERE MaSach = ?";
+        ps = conn.prepareStatement(sql);
         ps.setInt(1, sach.getMasach());
         ps.execute();
         return 1;

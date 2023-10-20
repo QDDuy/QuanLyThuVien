@@ -5,7 +5,7 @@
 package Main;
 
 
-import Dao.QuanLyDocGia;
+import Contructor.QuanLyDocGia;
 
 import DangNhap.DangNhap;
 import form_main.quan_ly_doc_giaJPanel;

@@ -4,7 +4,7 @@
  */
 package form_main;
 
-import Dao.QuanLyNguoiDung;
+import Contructor.QuanLyNguoiDung;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.RowFilter;
@@ -80,6 +80,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
     }
     
     public void view(){
+        List<QuanLyNguoiDung> list = new QuanLyNguoiDung().getList();
         nguoiDung = list.get(pos);
         this.txtMaND.setText(Integer.toString(nguoiDung.getManguoidung()));
         this.txtTenND.setText(nguoiDung.getTennguoidung());

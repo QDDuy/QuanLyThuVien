@@ -5,7 +5,7 @@
 package form_main;
 
 
-import Dao.QuanLySach;
+import Contructor.QuanLySach;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.List;
@@ -93,6 +93,7 @@ public class quan_ly_sach_JPanel extends javax.swing.JPanel {
     }
     
     public void view(){
+        List<QuanLySach> list = new QuanLySach().getList();
         sach = list.get(pos);
         this.txtma_sach.setText(Integer.toString(sach.getMasach()));
         this.txtma_ke_sach.setText(Integer.toString(sach.getMakesach()));
