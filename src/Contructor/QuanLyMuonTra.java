@@ -4,6 +4,7 @@
  */
 package Contructor;
 
+import Constructer.MuonTra;
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
 import java.util.Date;
@@ -129,7 +130,7 @@ public class QuanLyMuonTra {
             String sql = "SELECT * FROM MuonTra WHERE MaGiaoDich = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, muontra.getMaGiaodich());
-            ps.execute();
+            
             ResultSet rs = ps.executeQuery();
             // Nếu mã Thẻ đã có trong bảng, hiển thị thông báo lỗi
             if (rs.next()) {
@@ -148,8 +149,7 @@ public class QuanLyMuonTra {
             JOptionPane.showMessageDialog(null, "Mã thẻ không tồn tại!");
             return 0;
             }
-            
-            if(getNgaytrasach() != null){
+            if(muontra.getNgaytrasach() != null){
                 
                 java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
                 java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
@@ -163,8 +163,18 @@ public class QuanLyMuonTra {
                 ps.setDate(5, ngayHetHan);
                 ps.setDate(6, ngayTra);
                 ps.setInt(7,muontra.getSotien());
+                ps.execute();
+                rs = ps.getGeneratedKeys();
+                int generatedKey = 0;
+                if(rs.next()){
+                    generatedKey = rs.getInt(1);
+                }
+                ps.close();
+                return generatedKey;
                 
-            }else if(getNgaytrasach() == null){
+            }else if(muontra.getNgaytrasach() == null){
+                int soluong = muontra.getSoLuongSach(muontra.getMasach()) - 1;
+                capNhatSoLuongSach(muontra.getMasach(), soluong);
                 java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
                 java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
                 
@@ -176,26 +186,16 @@ public class QuanLyMuonTra {
                 ps.setDate(4, ngayMuon);
                 ps.setDate(5, ngayHetHan);
                 ps.setInt(6,muontra.getSotien());
+                ps.execute();
+                rs = ps.getGeneratedKeys();
+                int generatedKey = 0;
+                if(rs.next()){
+                    generatedKey = rs.getInt(1);
+                }
+                ps.close();
+                return generatedKey;
             }
-            ps.execute();
-            rs = ps.getGeneratedKeys();
-            int generatedKey = 0;
-            if(rs.next()){
-                generatedKey = rs.getInt(1);
-            }
-            ps.close();
-            
-            int soluongHienTai = getSoLuongSach(muontra.getMasach());
-
-            // Nếu ngày trả sách là null, thì giảm số lượng sách đi 1
-            if (muontra.getNgaytrasach() == null) {
-                soluongHienTai -= 1;
-            }
-
-            // Cập nhật số lượng sách
-            capNhatSoLuongSach(muontra.getMasach(), soluongHienTai);
-            
-            return generatedKey;
+          
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -207,8 +207,13 @@ public class QuanLyMuonTra {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
+            
             if(getNgaytrasach() != null){
                 
+                if(isNgayTraNull(muontra.getMaGiaodich()) == true){
+                    int soluong = muontra.getSoLuongSach(muontra.getMasach()) + 1;
+                    capNhatSoLuongSach(muontra.getMasach(), soluong);
+                } 
                 java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
                 java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
                 java.sql.Date ngayTra = new java.sql.Date(muontra.getNgaytrasach().getTime());
@@ -225,17 +230,23 @@ public class QuanLyMuonTra {
                 ps.close();
                 
             }else if(getNgaytrasach() == null){
+                
+                if(isNgayTraNull(muontra.getMaGiaodich()) != true){
+                    int soluong = muontra.getSoLuongSach(muontra.getMasach()) - 1;
+                    capNhatSoLuongSach(muontra.getMasach(), soluong);
+                } 
                 java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
                 java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
                 
-                String sql = "UPDATE Muontra SET MaThe = ?, MaSach = ?, NgayMuon = ?, NgayHetHan = ?, SoTien = ? WHERE MaGiaoDich = ? ";
+                String sql = "UPDATE Muontra SET MaThe = ?, MaSach = ?, NgayMuon = ?, NgayHetHan = ?, NgayTraSach = ?, SoTien = ? WHERE MaGiaoDich = ? ";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setInt(6, muontra.getMaGiaodich());
+                ps.setInt(7, muontra.getMaGiaodich());
                 ps.setInt(1, muontra.getMathe());
                 ps.setInt(2, muontra.getMasach());
                 ps.setDate(3, ngayMuon);
                 ps.setDate(4, ngayHetHan);
-                ps.setInt(5,muontra.getSotien());
+                ps.setDate(5, (java.sql.Date)(muontra.getNgaytrasach()) );
+                ps.setInt(6,muontra.getSotien());
                 ps.execute();
                 ps.close();
                 
@@ -305,5 +316,21 @@ public class QuanLyMuonTra {
         return soluong;
     }
 
-   
+    
+    public boolean isNgayTraNull(int magiaodich) throws SQLException {
+        Connection conn = DatabaseConnection.getConnection();
+        String sql = "SELECT NgayTraSach FROM Muontra WHERE MaGiaoDich = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, magiaodich);
+        ResultSet rs = ps.executeQuery();
+
+        // Nếu ngày trả là null thì trả về true
+        if (!rs.next()) {
+            return true;
+        }
+
+        // Nếu ngày trả không phải là null thì trả về false
+        return rs.getDate("NgayTraSach") == null;
+    }
+
 }

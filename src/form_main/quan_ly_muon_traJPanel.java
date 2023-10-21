@@ -19,6 +19,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
 /**
@@ -36,6 +38,37 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         initComponents();
         view();
         table_view();
+        /*
+        txtNgayTraSach.addPropertyChangeListener("value", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                // Tính toán lại số tiền
+                int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
+                txtSoTien.setText(Integer.toString(soTien));
+            }
+        });
+
+        // Thêm sự kiện propertyChange() cho ô textbox ngay muon
+        txtNgayMuon.addPropertyChangeListener("value", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                // Tính toán lại số tiền
+                int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
+                txtSoTien.setText(Integer.toString(soTien));
+            }
+        });
+
+        // Thêm sự kiện propertyChange() cho ô textbox ngay het han
+        txtNgayHetHan.addPropertyChangeListener("value", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                // Tính toán lại số tiền
+                int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
+                txtSoTien.setText(Integer.toString(soTien));
+            }
+        });
+        */
+        
         
         this.jTable_view.setAutoCreateRowSorter(true);
 
@@ -100,7 +133,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         this.txtNgayMuon.setDate(muonTra.getNgaymuon());
         this.txtNgayHetHan.setDate(muonTra.getNgayhethan());
         this.txtNgayTraSach.setDate(muonTra.getNgaytrasach());
-        this.txtSoTien.setText(Double.toString(muonTra.getSotien()));
+        this.txtSoTien.setText(Integer.toString(calculateSoTien(muonTra.getNgaymuon(), muonTra.getNgayhethan(), muonTra.getNgaytrasach())));
         
     }
     
@@ -108,19 +141,19 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     public QuanLyMuonTra getmodel_create() throws Exception{
         QuanLyMuonTra muonTra = new QuanLyMuonTra();
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
-        muonTra.setMathe(Integer.parseInt(txtMaSach.getText()));
+        muonTra.setMathe(Integer.parseInt(txtMaThe.getText()));
         muonTra.setMasach(Integer.parseInt(txtMaSach.getText()));        
         muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
         muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
         muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
-        muonTra.setSotien(Integer.parseInt(txtSoTien.getText()));
+        muonTra.setSotien(Integer.valueOf(calculateSoTien(muonTra.getNgaymuon(), muonTra.getNgayhethan(), muonTra.getNgaytrasach())));
         muonTra.create(muonTra);
         return muonTra;
     }
     public QuanLyMuonTra getmodel_update() throws Exception{
         QuanLyMuonTra muonTra = new QuanLyMuonTra();
         muonTra.setMaGiaodich(Integer.parseInt(txtMaGD.getText()));
-        muonTra.setMathe(Integer.parseInt(txtMaSach.getText()));
+        muonTra.setMathe(Integer.parseInt(txtMaThe.getText()));
         muonTra.setMasach(Integer.parseInt(txtMaSach.getText()));      
         muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
         muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
@@ -144,7 +177,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
         }
     }
-     public void refreshTable() {
+    public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) jTable_view.getModel();
         model.setRowCount(0); // Xóa tất cả các dòng hiện tại trong bảng
 
@@ -152,6 +185,16 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         for (QuanLyMuonTra x : updatedList) {
             model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
         }
+    }
+     
+    private int calculateSoTien(Date ngay_muon, Date ngay_het_han, Date ngay_tra){
+        long soNgayMuon = ngay_het_han.getTime() - ngay_muon.getTime();
+        long soNgayTraMuon = 0;
+        if(ngay_tra != null){
+            soNgayTraMuon = ngay_tra.getTime() - ngay_het_han.getTime();
+        }
+        int soTien = (int) (soNgayMuon / (1000 * 60 * 60 * 24) * 20000 + soNgayTraMuon/(1000 * 60 * 60 * 24) * 40000);
+        return soTien;
     }
 
     @SuppressWarnings("unchecked")
@@ -181,6 +224,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         btnUpdateMT = new javax.swing.JButton();
         btnThemMT = new javax.swing.JButton();
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         jTable_view.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -195,6 +240,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable_view);
+
+        txtSoTien.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel1.setText("Mã GD :");
 
@@ -388,6 +435,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnXoaMTActionPerformed
 
+        
+    
     private void btnUpdateMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMTActionPerformed
         // TODO add your handling code here:
         try {
