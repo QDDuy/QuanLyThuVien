@@ -146,7 +146,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
         muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
         muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
-        muonTra.setSotien(Integer.valueOf(calculateSoTien(muonTra.getNgaymuon(), muonTra.getNgayhethan(), muonTra.getNgaytrasach())));
+        muonTra.setSotien(Integer.valueOf(calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate())));
         muonTra.create(muonTra);
         return muonTra;
     }
@@ -158,7 +158,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         muonTra.setNgaymuon((Date) txtNgayMuon.getDate());
         muonTra.setNgayhethan((Date) txtNgayHetHan.getDate());
         muonTra.setNgaytrasach((Date) txtNgayTraSach.getDate());
-        muonTra.setSotien(Integer.parseInt(txtSoTien.getText()));
+        muonTra.setSotien(Integer.valueOf(calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate())));
         muonTra.edit(muonTra);
         return muonTra;
     }
