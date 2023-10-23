@@ -38,36 +38,44 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         initComponents();
         view();
         table_view();
+        
         /*
-        txtNgayTraSach.addPropertyChangeListener("value", new PropertyChangeListener() {
+        this.txtNgayTraSach.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                // Tính toán lại số tiền
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
                 txtSoTien.setText(Integer.toString(soTien));
             }
         });
 
-        // Thêm sự kiện propertyChange() cho ô textbox ngay muon
-        txtNgayMuon.addPropertyChangeListener("value", new PropertyChangeListener() {
+        
+        this.txtNgayMuon.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                // Tính toán lại số tiền
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
                 txtSoTien.setText(Integer.toString(soTien));
             }
         });
 
-        // Thêm sự kiện propertyChange() cho ô textbox ngay het han
-        txtNgayHetHan.addPropertyChangeListener("value", new PropertyChangeListener() {
+        
+        this.txtNgayHetHan.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                // Tính toán lại số tiền
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
                 txtSoTien.setText(Integer.toString(soTien));
             }
         });
+       
         */
+        this.txtSoTien.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int soTien = calculateSoTien(txtNgayMuon.getDate(), txtNgayHetHan.getDate(), txtNgayTraSach.getDate());
+                txtSoTien.setText(Integer.toString(soTien));
+            }
+        });
+        
+        
         
         
         this.jTable_view.setAutoCreateRowSorter(true);
@@ -109,7 +117,6 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     private void sort() {
         // Lấy mô hình của bảng
         DefaultTableModel model = (DefaultTableModel) this.jTable_view.getModel();
-
         // Tạo một đối tượng Comparator để so sánh dữ liệu trong cột Ho va ten đệm
         Comparator<QuanLyMuonTra> comparator = (o1, o2) -> {
             if (this.isAsc) {
@@ -241,6 +248,7 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable_view);
 
+        txtSoTien.setEditable(false);
         txtSoTien.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel1.setText("Mã GD :");

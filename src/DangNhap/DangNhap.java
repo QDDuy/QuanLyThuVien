@@ -184,6 +184,7 @@ public class DangNhap extends javax.swing.JFrame {
         String taiKhoan = txtTaiKhoan.getText().trim();
         char[] matKhauChars = txtMatKhau.getPassword();
         String matKhau = new String(matKhauChars).trim();
+        String chucvu = "";
         
         if (taiKhoan.isEmpty() || matKhau.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu không được để trống");

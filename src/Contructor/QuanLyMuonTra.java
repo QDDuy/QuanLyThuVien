@@ -4,7 +4,7 @@
  */
 package Contructor;
 
-import Constructer.MuonTra;
+
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
 import java.util.Date;
@@ -173,8 +173,14 @@ public class QuanLyMuonTra {
                 return generatedKey;
                 
             }else if(muontra.getNgaytrasach() == null){
-                int soluong = muontra.getSoLuongSach(muontra.getMasach()) - 1;
-                capNhatSoLuongSach(muontra.getMasach(), soluong);
+                if(muontra.getSoLuongSach(muontra.getMasach()) == 0){
+                        JOptionPane.showMessageDialog(null, "số lượng sách có mã sách là "+ muontra.getMasach()+ " không đủ để cho mượn");
+                        return 0;
+                }
+                if(muontra.getSoLuongSach(muontra.getMasach()) > 0){
+                    int soluong = muontra.getSoLuongSach(muontra.getMasach()) - 1;
+                    capNhatSoLuongSach(muontra.getMasach(), soluong);
+                }
                 java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
                 java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
                 
@@ -232,8 +238,14 @@ public class QuanLyMuonTra {
             }else if(getNgaytrasach() == null){
                 
                 if(isNgayTraNull(muontra.getMaGiaodich()) != true){
-                    int soluong = muontra.getSoLuongSach(muontra.getMasach()) - 1;
-                    capNhatSoLuongSach(muontra.getMasach(), soluong);
+                    if(muontra.getSoLuongSach(muontra.getMasach()) == 0){
+                        JOptionPane.showMessageDialog(null, "số lượng sách có mã sách là "+ muontra.getMasach()+ " không đủ để cho mượn");
+                        return 0;
+                    }
+                    if(muontra.getSoLuongSach(muontra.getMasach()) > 0){
+                        int soluong = muontra.getSoLuongSach(muontra.getMasach()) - 1;
+                        capNhatSoLuongSach(muontra.getMasach(), soluong);
+                    }
                 } 
                 java.sql.Date ngayMuon = new java.sql.Date(muontra.getNgaymuon().getTime());
                 java.sql.Date ngayHetHan = new java.sql.Date(muontra.getNgayhethan().getTime());
@@ -262,6 +274,11 @@ public class QuanLyMuonTra {
     public int delete(QuanLyMuonTra muonTra) {
     try {
         Connection conn = DatabaseConnection.getConnection();
+        if(isNgayTraNull(muonTra.getMaGiaodich()) == true){
+            JOptionPane.showMessageDialog(null, "Bạn không thể xóa dữ liệu này khi sách chưa được trả!!!");
+            return 0;
+        }
+        
         // Sử dụng dữ liệu này để thực hiện hành động xóa
         String sql = "DELETE FROM Muontra WHERE MaGiaoDich = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -332,5 +349,7 @@ public class QuanLyMuonTra {
         // Nếu ngày trả không phải là null thì trả về false
         return rs.getDate("NgayTraSach") == null;
     }
+    
+    
 
 }

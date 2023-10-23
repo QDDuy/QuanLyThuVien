@@ -6,6 +6,7 @@ package form_main;
 
 
 import DAO.DAO_thong_ke;
+import java.sql.SQLException;
 
 /**
  *
@@ -16,10 +17,11 @@ public class quan_ly_thong_keJPanel extends javax.swing.JPanel {
     /**
      * Creates new form quan_ly_thong_keJPanel
      */
-    public quan_ly_thong_keJPanel() {
+    public quan_ly_thong_keJPanel() throws SQLException {
         initComponents();
         DAO_thong_ke thongke = new DAO_thong_ke();
         thongke.getTotalRowLabel_luot_giao_dich(jLabel_giao_dich_muon_tra);
+        thongke.getTotalRowLabel_tre_han_tra_sach(jLabel_tre_han_tra_sach);
         thongke.getTotalRowLabel_tong_so_sach(jLabel_tong_sach);
     }
 
