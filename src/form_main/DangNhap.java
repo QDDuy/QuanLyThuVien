@@ -1,4 +1,4 @@
-package DangNhap;
+package form_main;
 import connectsql.DatabaseConnection;
 import form_main.Form_Main;
 import java.sql.*;
@@ -7,10 +7,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import javax.swing.SwingUtilities;
+import DAO.DAO_dangnhap;
 
 
 public class DangNhap extends javax.swing.JFrame {
     private Connection conn ;
+    DAO_dangnhap login = new DAO_dangnhap();
     public DangNhap() {
         initComponents();
         //txtUserName.setBackground(new java.awt.Color(0,0,0,1));        
@@ -190,31 +192,8 @@ public class DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu không được để trống");
             return;
         }
+        login.KTTaikhoan(taiKhoan, matKhau);
         
-        String sql_login = "select * from TaiKhoan where TenNguoiDung=? and MatKhau=?";
-        try {
-            // Kiểm tra xem conn đã được khởi tạo hay chưa
-            if (conn != null) {
-                PreparedStatement pst = conn.prepareStatement(sql_login);
-                pst.setString(1, taiKhoan);
-                pst.setString(2, matKhau);
-                ResultSet rs = pst.executeQuery();
-                
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(this, "Đăng Nhập thành công");
-                    this.dispose();
-                    Form_Main fm=new Form_Main();
-                    fm.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Lỗi kết nối đến cơ sở dữ liệu");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện đăng nhập: " + e.getMessage());
-        }
     }
 
 

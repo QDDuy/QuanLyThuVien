@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
@@ -42,7 +44,12 @@ public class Form_Main extends javax.swing.JFrame {
         hieu_ung.seteVent(list);
         
     }
-
+    public JPanel getjpanel_nguoi_dung(){
+        return jPanel_nguoidung;
+    }    
+    public JLabel getjlabel_nguoi_dung(){
+        return quanly_nguoidung;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,7 +337,7 @@ public class Form_Main extends javax.swing.JFrame {
     private void close_formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_formMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new DangNhap.DangNhap().setVisible(true);
+        new form_main.DangNhap().setVisible(true);
     }//GEN-LAST:event_close_formMouseClicked
 
     
