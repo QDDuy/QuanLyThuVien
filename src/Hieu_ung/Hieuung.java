@@ -17,7 +17,10 @@ import java.awt.SystemColor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.constant.DirectMethodHandleDesc;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -80,11 +83,18 @@ public class Hieuung {
                     node = new quan_ly_muon_traJPanel();
                     break;
                 case "quan_ly_nhap_sach":
-                    node = new  quan_ly_nhapJPanel();
+                    node = new quan_ly_nhapJPanel();
                     break;
                 case "thong_ke":
-                    node = new quan_ly_thong_keJPanel();
+                {
+                    try {
+                        node = new quan_ly_thong_keJPanel();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Hieuung.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case "quan_ly_nguoi_dung":
                     node = new quan_ly_nguoi_dungJPanel();
                     break;
