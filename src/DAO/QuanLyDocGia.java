@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Contructor;
+package DAO;
 
 
 import connectsql.DatabaseConnection;
@@ -94,10 +94,7 @@ public class QuanLyDocGia {
     public String getEmail() {
         return email;
     }
-    @Override
-    public String toString() {
-        return "QuanLyDocGia{" + "MaTHe=" + MaTHe + ", tenKH=" + tenKH + ", diachi=" + diachi + ", SDT=" + SDT + ", cccd=" + cccd + ", email=" + email + '}';
-    }
+   
     // xu ly su kien them, sua, xoa, tim kiem, hiển thị
     public List<QuanLyDocGia> getList(){
         Connection conn = DatabaseConnection.getConnection();

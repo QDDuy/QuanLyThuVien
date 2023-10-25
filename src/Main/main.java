@@ -5,7 +5,7 @@
 package Main;
 
 
-import Contructor.QuanLyDocGia;
+import DAO.QuanLyDocGia;
 
 import form_main.DangNhap;
 import form_main.quan_ly_doc_giaJPanel;
@@ -18,7 +18,7 @@ public class main {
     
     public static void main(String[] args) {
         
-       new form_main.DangNhap().setVisible(true);
+       new form_main.Form_Main().setVisible(true);
     }
     
     

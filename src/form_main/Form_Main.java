@@ -6,7 +6,7 @@
 package form_main;
 
 import Hieu_ung.Hieuung;
-import Contructor.danhmuc;
+import DAO.danhmuc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;

@@ -4,7 +4,7 @@
  */
 package Hieu_ung;
 
-import Contructor.danhmuc;
+import DAO.danhmuc;
 import form_main.quan_ly_doc_giaJPanel;
 import form_main.quan_ly_muon_traJPanel;
 import form_main.quan_ly_nhapJPanel;
