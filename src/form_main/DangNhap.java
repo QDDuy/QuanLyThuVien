@@ -183,17 +183,45 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
  private void login() {
-        String taiKhoan = txtTaiKhoan.getText().trim();
+        String taikhoan = txtTaiKhoan.getText().trim();
         char[] matKhauChars = txtMatKhau.getPassword();
-        String matKhau = new String(matKhauChars).trim();
+        String matkhau = new String(matKhauChars).trim();
         String chucvu = "";
         
-        if (taiKhoan.isEmpty() || matKhau.isEmpty()) {
+        if (taikhoan.isEmpty() || matkhau.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tài khoản và mật khẩu không được để trống");
             return;
         }
-        login.KTTaikhoan(taiKhoan, matKhau);
         
+        String sql_login = "select * from TaiKhoan where TenNguoiDung=? and MatKhau=?";
+        try {
+            // Kiểm tra xem conn đã được khởi tạo hay chưa
+            Connection conn = DatabaseConnection.getConnection();
+            if (conn != null) {
+                PreparedStatement pst = conn.prepareStatement(sql_login);
+                pst.setString(1, taikhoan);
+                pst.setString(2, matkhau);
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
+                    this.dispose();
+                    Form_Main fm = new Form_Main();
+                    fm.setVisible(true);
+                    if(login.isChucvu(taikhoan, matkhau) == false){
+                        fm.getjpanel_nguoi_dung().setVisible(false);
+                        fm.getjlabel_nguoi_dung().setVisible(false);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sai tài khoản hoặc mật khẩu");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Lỗi kết nối đến cơ sở dữ liệu");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi thực hiện đăng nhập: " + e.getMessage());
+        }
     }
 
 

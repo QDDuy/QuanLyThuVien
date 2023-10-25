@@ -174,6 +174,8 @@ public class QuanLyMuonTra {
                 
             }else if(muontra.getNgaytrasach() == null){
                 if(muontra.getSoLuongSach(muontra.getMasach()) == 0){
+                        String tinhTrangSach = "Hết Sách";
+                        muontra.capNhatTinhTrangSach(muontra.getMasach(), tinhTrangSach);
                         JOptionPane.showMessageDialog(null, "số lượng sách có mã sách là "+ muontra.getMasach()+ " không đủ để cho mượn");
                         return 0;
                 }
@@ -215,7 +217,10 @@ public class QuanLyMuonTra {
             // Sử dụng dữ liệu này để thực hiện hành động sửa
             
             if(getNgaytrasach() != null){
-                
+                if(muontra.getSoLuongSach(muontra.getMasach()) == 0){
+                    String tinhtrangsach = "Còn sách";
+                    capNhatTinhTrangSach(muontra.getMasach(), tinhtrangsach);
+                }
                 if(isNgayTraNull(muontra.getMaGiaodich()) == true){
                     int soluong = muontra.getSoLuongSach(muontra.getMasach()) + 1;
                     capNhatSoLuongSach(muontra.getMasach(), soluong);
@@ -309,6 +314,23 @@ public class QuanLyMuonTra {
         ps.close();
         
     }
+    public void capNhatTinhTrangSach(int masach, String tinhtrangsach) throws SQLException {
+        // Tạo truy vấn cập nhật số lượng sách
+        Connection conn = DatabaseConnection.getConnection();
+        String query = "UPDATE Sach SET TinhTrangSach = ? WHERE MaSach = ?";
+
+        // Tạo đối tượng PreparedStatement
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        // Gán giá trị cho các tham số
+        ps.setString(1, tinhtrangsach);
+        ps.setInt(2, masach);
+
+        // Thực thi truy vấn
+        ps.execute();
+        ps.close();
+        
+    }    
 
     public int getSoLuongSach(int masach) throws SQLException {
         // Tạo truy vấn lấy số lượng sách

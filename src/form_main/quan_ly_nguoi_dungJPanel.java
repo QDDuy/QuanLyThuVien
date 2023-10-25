@@ -30,7 +30,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
         this.jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                // Kiểm tra xem người dùng có click chuột vào cột Ho va ten đệm hay không
+                
                 if (evt.getSource() == jTable_view && evt.getClickCount() == 1 && evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
                     // Lấy cột mà người dùng click chuột
                     int columnIndex = jTable_view.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -111,7 +111,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
         nguoiDung.setManguoidung(Integer.parseInt(txtMaND.getText()));
         nguoiDung.setTennguoidung(txtTenND.getText());
         nguoiDung.setMatkhau(txtMatKhau.getText());
-        nguoiDung.setChucvu(txtChucVu.getText());
+        nguoiDung.setChucvu("Nhân Viên");
         nguoiDung.create(nguoiDung);
         return nguoiDung;
     }
@@ -120,7 +120,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
         nguoiDung.setManguoidung(Integer.parseInt(txtMaND.getText()));
         nguoiDung.setTennguoidung(txtTenND.getText());
         nguoiDung.setMatkhau(txtMatKhau.getText());
-        nguoiDung.setChucvu(txtChucVu.getText());
+        nguoiDung.setChucvu("Nhân Viên");
         nguoiDung.edit(nguoiDung);
         return nguoiDung;
     }
@@ -206,7 +206,15 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 "Mã Người Dùng", "Tên Người Dùng", "Mật Khẩu", "Chức Vụ"
             }
         ));
+        jTable_view.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_viewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_view);
+
+        txtChucVu.setEditable(false);
+        txtChucVu.setText("Nhân Viên");
 
         jLabel1.setText("Search");
 
@@ -269,7 +277,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 .addGap(143, 143, 143))
         );
 
-        btnThemND.setText("Thêm");
+        btnThemND.setText("Insert");
         btnThemND.setPreferredSize(new java.awt.Dimension(90, 30));
         btnThemND.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,7 +285,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoaND.setText("Xóa");
+        btnXoaND.setText("Delete");
         btnXoaND.setPreferredSize(new java.awt.Dimension(90, 30));
         btnXoaND.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,11 +347,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-      private void jTable_viewMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
-        pos = this.jTable_view.getSelectedRow();
-        view();
-    }                                        
+                                 
 
     private void btnThemNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNDActionPerformed
         // TODO add your handling code here:
@@ -357,7 +361,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
 
     private void btnXoaNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNDActionPerformed
         // TODO add your handling code here:
-                try {
+        try {
             QuanLyNguoiDung nguoiDung = getmodel_delete();
             refreshTable();
         } catch (Exception ex) {
@@ -374,6 +378,12 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
             System.out.println("Error" + ex);
         }
     }//GEN-LAST:event_btnUpdateNDActionPerformed
+
+    private void jTable_viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_viewMouseClicked
+        // TODO add your handling code here:
+        pos = this.jTable_view.getSelectedRow();
+        view();
+    }//GEN-LAST:event_jTable_viewMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

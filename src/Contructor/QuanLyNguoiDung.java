@@ -22,6 +22,7 @@ public class QuanLyNguoiDung {
     private String tennguoidung;
     private String matkhau;
     private String chucvu;
+    
     public QuanLyNguoiDung(int manguoidung, String tennguoidung, String matkhau, String chucvu) {
         this.manguoidung = manguoidung;
         this.tennguoidung = tennguoidung;

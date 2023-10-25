@@ -235,7 +235,7 @@ public class quan_ly_nhapJPanel extends javax.swing.JPanel {
                 .addGap(64, 64, 64))
         );
 
-        btnThemPN.setText("Thêm");
+        btnThemPN.setText("Insert");
         btnThemPN.setPreferredSize(new java.awt.Dimension(90, 30));
         btnThemPN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +243,7 @@ public class quan_ly_nhapJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoaPN.setText("Xóa");
+        btnXoaPN.setText("Delete");
         btnXoaPN.setPreferredSize(new java.awt.Dimension(90, 30));
         btnXoaPN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

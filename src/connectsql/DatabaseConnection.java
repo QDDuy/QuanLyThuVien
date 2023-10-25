@@ -10,10 +10,11 @@ public class DatabaseConnection {
 
     public static Connection getConnection() {
         if (conn == null) {
-            String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=QuanLyThuVien;trustServerCertificate=true";
+            String jdbcUrl = "jdbc:sqlserver://localhost:1433;databaseName=QuanLyThuVien;trustServerCertificate=true;";
             String username = "sa";
             String password = "123456789";
 
+            
             try {
                 conn = DriverManager.getConnection(jdbcUrl, username, password);
             } catch (SQLException e) {

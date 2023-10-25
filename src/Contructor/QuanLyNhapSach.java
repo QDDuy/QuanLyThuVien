@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class QuanLyNhapSach {
     private String nguoinhap;
     private Date ngaynhap;
     private int soluong;
+
 
     public QuanLyNhapSach(int maphieunhap, int masach, String nguoinhap, Date ngaynhap, int soluong) {
         this.maphieunhap = maphieunhap;
@@ -116,6 +118,19 @@ public class QuanLyNhapSach {
             return 0;
             }
             
+            sql = "SELECT * FROM Sach WHERE MaSach = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, nhapSach.getMasach());
+            rs = ps.executeQuery();
+
+            // Nếu mã sách không có trong bảng sách, hiển thị thông báo lỗi
+            if (!rs.next()) {
+            JOptionPane.showMessageDialog(null, "Mã sách không tồn tại!");
+            return 0;
+            }
+            
+            int SoLuong = getSoLuongSach_Bangsach(nhapSach.getMasach()) + nhapSach.getSoluong();
+            capNhatSoLuongSach(nhapSach.getMasach(), SoLuong);
             java.sql.Date ngayNhap = new java.sql.Date(nhapSach.getNgaynhap().getTime());
             sql = "INSERT INTO PhieuNhap(MaPhieuNhap, MaSach, NguoiNhap, NgayNhap, SoLuong) values(?, ? , ?, ?, ?) ";
             ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -143,6 +158,15 @@ public class QuanLyNhapSach {
         try {
             Connection conn = DatabaseConnection.getConnection();
             // Sử dụng dữ liệu này để thực hiện hành động sửa
+            if(nhapSach.getSoLuongSach_BangNhap(nhapSach.getMaphieunhap())> nhapSach.getSoluong()){
+                int SoLuong = nhapSach.getSoLuongSach_Bangsach(nhapSach.getMasach()) - (nhapSach.getSoLuongSach_BangNhap(nhapSach.getMaphieunhap()) - nhapSach.getSoluong());
+                capNhatSoLuongSach(nhapSach.getMasach(), SoLuong);
+            }
+            
+            else if(nhapSach.getSoLuongSach_BangNhap(nhapSach.getMaphieunhap())< nhapSach.getSoluong()){
+                int SoLuong = nhapSach.getSoluong() - nhapSach.getSoLuongSach_BangNhap(nhapSach.getMaphieunhap());
+                capNhatSoLuongSach(nhapSach.getMasach(), SoLuong + nhapSach.getSoLuongSach_Bangsach(nhapSach.getMasach()));
+            }
             java.sql.Date ngayNhap = new java.sql.Date(nhapSach.getNgaynhap().getTime());
             String sql = "UPDATE PhieuNhap SET MaSach = ?, NguoiNhap = ?, NgayNhap = ?, SoLuong = ? WHERE MaPhieuNhap = ?";
             PreparedStatement ps = conn.prepareStatement(sql);    
@@ -159,18 +183,79 @@ public class QuanLyNhapSach {
         return 0;
     }
     public int delete(QuanLyNhapSach nhapSach) {
-    try {
-        Connection conn = DatabaseConnection.getConnection();
-        // Sử dụng dữ liệu này để thực hiện hành động xóa
-        String sql = "DELETE FROM PhieuNhap WHERE MaPhieuNhap = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, nhapSach.getMaphieunhap());
-        ps.execute();
-        return 1;
-    } catch (Exception e) {
-        e.printStackTrace();
+        try {
+            Connection conn = DatabaseConnection.getConnection();
+            // Sử dụng dữ liệu này để thực hiện hành động xóa
+            String sql = "DELETE FROM PhieuNhap WHERE MaPhieuNhap = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, nhapSach.getMaphieunhap());
+            ps.execute();
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
-    return 0;
-}
+    public void capNhatSoLuongSach(int masach, int soluong) throws SQLException {
+        // Tạo truy vấn cập nhật số lượng sách
+        Connection conn = DatabaseConnection.getConnection();
+        String query = "UPDATE Sach SET SoLuong = ? WHERE MaSach = ?";
 
+        // Tạo đối tượng PreparedStatement
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        // Gán giá trị cho các tham số
+        ps.setInt(1, soluong);
+        ps.setInt(2, masach);
+
+        // Thực thi truy vấn
+        ps.execute();
+        ps.close();
+        
+    }
+    
+    public int getSoLuongSach_Bangsach(int masach) throws SQLException {
+        // Tạo truy vấn lấy số lượng sách
+        Connection conn = DatabaseConnection.getConnection();
+        String query = "SELECT SoLuong FROM Sach WHERE MaSach = ?";
+
+        // Tạo đối tượng PreparedStatement
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        // Gán giá trị cho tham số
+        ps.setInt(1, masach);
+
+        // Thực thi truy vấn
+        ResultSet resultSet = ps.executeQuery();
+
+        // Lấy số lượng sách
+        int soluong = 0;
+        if (resultSet.next()) {
+            soluong = resultSet.getInt(1);
+        }
+
+        return soluong;
+    }
+    public int getSoLuongSach_BangNhap(int maphieunhap) throws SQLException {
+        // Tạo truy vấn lấy số lượng sách
+        Connection conn = DatabaseConnection.getConnection();
+        String query = "SELECT SoLuong FROM PhieuNhap WHERE MaPhieuNhap = ?";
+
+        // Tạo đối tượng PreparedStatement
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        // Gán giá trị cho tham số
+        ps.setInt(1, maphieunhap);
+
+        // Thực thi truy vấn
+        ResultSet resultSet = ps.executeQuery();
+
+        // Lấy số lượng sách
+        int soluong = 0;
+        if (resultSet.next()) {
+            soluong = resultSet.getInt(1);
+        }
+
+        return soluong;
+    } 
 }

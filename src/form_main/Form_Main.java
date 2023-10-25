@@ -222,7 +222,7 @@ public class Form_Main extends javax.swing.JFrame {
             .addGroup(jPanel_nhapLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(quanly_nhap, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         jPanel_nhapLayout.setVerticalGroup(
             jPanel_nhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,9 +249,7 @@ public class Form_Main extends javax.swing.JFrame {
                     .addGroup(jPanel_menuLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(close_form))
-                    .addGroup(jPanel_menuLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel_nhap, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel_nhap, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel_menuLayout.setVerticalGroup(
@@ -349,8 +347,6 @@ public class Form_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_logo;
     private javax.swing.JPanel jPanel_Frame;
     private javax.swing.JPanel jPanel_docgia;
-    private javax.swing.JPanel jPanel_docgia1;
-    private javax.swing.JPanel jPanel_docgia2;
     private javax.swing.JPanel jPanel_menu;
     private javax.swing.JPanel jPanel_muontra;
     private javax.swing.JPanel jPanel_nguoidung;
@@ -359,8 +355,6 @@ public class Form_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_thongke;
     private javax.swing.JPanel jPanel_view;
     private javax.swing.JLabel quanly_docgia;
-    private javax.swing.JLabel quanly_docgia1;
-    private javax.swing.JLabel quanly_docgia2;
     private javax.swing.JLabel quanly_muontra;
     private javax.swing.JLabel quanly_nguoidung;
     private javax.swing.JLabel quanly_nhap;
