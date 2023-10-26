@@ -13,7 +13,7 @@ public class quan_ly_nhapJPanel extends javax.swing.JPanel {
 
     List<QuanLyNhapSach> list = new QuanLyNhapSach().getList();
     QuanLyNhapSach nhapSach;
-    private static int pos = 0;
+    private int pos = 0;
     private boolean isAsc = true;
     private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_nhapJPanel() {

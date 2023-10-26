@@ -278,11 +278,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
                   <Component id="btnThemMT" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                   <Component id="btnXoaMT" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                   <Component id="btnUpdateMT" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="404" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

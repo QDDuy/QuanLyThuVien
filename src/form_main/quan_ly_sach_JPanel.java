@@ -32,7 +32,7 @@ public class quan_ly_sach_JPanel extends javax.swing.JPanel {
      */
     List<QuanLySach> list = new QuanLySach().getList();
     QuanLySach sach;
-    private static int pos = 0;
+    private int pos = 0;
     private boolean isAsc = true;
     private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_sach_JPanel() {

@@ -5,6 +5,7 @@
 package form_main;
 
 import Contructor.QuanLyMuonTra;
+import Hieu_ung.Hieuung;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.List;
@@ -19,8 +20,25 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import static java.lang.System.out;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 /**
@@ -74,8 +92,78 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
                 txtSoTien.setText(Integer.toString(soTien));
             }
         });
-        
-        
+ /*       
+            this.btnReport.addMouseListener(new MouseAdapter(){
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                        XSSFWorkbook workbook = new XSSFWorkbook();
+                        XSSFSheet spreadsheet = workbook.createSheet("Mượn Trả");
+
+                        XSSFRow row = null;
+                        Cell cell = null;
+
+                        row = spreadsheet.createRow((short) 2);
+                        row.setHeight((short) 500);
+                        cell = row.createCell(0, CellType.STRING);
+                        cell.setCellValue("DANH SÁCH Mượn Trả");
+
+                        row = spreadsheet.createRow((short) 3);
+                        row.setHeight((short) 500);
+                        cell = row.createCell(0, CellType.STRING);
+                        cell.setCellValue("Stt");
+                        cell = row.createCell(1, CellType.STRING);
+                        cell.setCellValue("Mã Giao Dịch");
+                        cell = row.createCell(2, CellType.STRING);
+                        cell.setCellValue("Mã Sách");
+                        cell = row.createCell(3, CellType.STRING);
+                        cell.setCellValue("Mã Thẻ");
+                        cell = row.createCell(4, CellType.STRING);
+                        cell.setCellValue("Ngày Mượn");
+                        cell = row.createCell(5, CellType.STRING);
+                        cell.setCellValue("Ngày Hết Hạn");
+                        cell = row.createCell(6, CellType.STRING);
+                        cell.setCellValue("Ngày Trả Sách");
+                        cell = row.createCell(7, CellType.STRING);
+                        cell.setCellValue("Số Tiền");
+
+
+
+                        QuanLyMuonTra muonTra = new QuanLyMuonTra();
+
+                        for (int i = 0; i < list.size(); i++) {
+                            QuanLyMuonTra muontra = list.get(i);
+                            row = spreadsheet.createRow((short) 6 + i);
+                            row.setHeight((short) 400);
+                            row.createCell(0).setCellValue(i + 1);
+                            row.createCell(1).setCellValue(muontra.getMaGiaodich());
+                            row.createCell(2).setCellValue(muontra.getMasach());
+                            row.createCell(3).setCellValue(muontra.getMathe());
+                            row.createCell(4).setCellValue(muonTra.getNgaymuon());
+                            row.createCell(5).setCellValue(muontra.getNgayhethan());
+                            row.createCell(6).setCellValue(muontra.getNgaytrasach());
+                            row.createCell(7).setCellValue(muontra.getSotien());
+                        }
+
+                    try {
+                        workbook.write(new FileOutputStream("D:/QuanlyMuonTra.xlsx"));
+
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(quan_ly_muon_traJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(quan_ly_muon_traJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        workbook.write(out);
+                    } catch (IOException ex) {
+                        Logger.getLogger(quan_ly_muon_traJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    out.close();
+
+                }
+            });
+*/
+           
         
         
         this.jTable_view.setAutoCreateRowSorter(true);
@@ -186,8 +274,8 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
     }
     public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) jTable_view.getModel();
-        model.setRowCount(0); // Xóa tất cả các dòng hiện tại trong bảng
-
+        // Xóa tất cả các dòng hiện tại trong bảng
+        model.setRowCount(0);
         List<QuanLyMuonTra> updatedList = new QuanLyMuonTra().getList(); // Lấy danh sách mới từ cơ sở dữ liệu
         for (QuanLyMuonTra x : updatedList) {
             model.addRow(new Object[]{ x.getMaGiaodich(), x.getMathe(), x.getMasach(), x.getNgaymuon(), x.getNgayhethan(), x.getNgaytrasach(), x.getSotien()});
@@ -374,11 +462,11 @@ public class quan_ly_muon_traJPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(btnThemMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104)
+                .addGap(157, 157, 157)
                 .addComponent(btnXoaMT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119)
+                .addGap(136, 136, 136)
                 .addComponent(btnUpdateMT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

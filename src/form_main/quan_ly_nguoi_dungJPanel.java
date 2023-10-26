@@ -16,7 +16,7 @@ public class quan_ly_nguoi_dungJPanel extends javax.swing.JPanel {
 
    List<QuanLyNguoiDung> list = new QuanLyNguoiDung().getList();
     QuanLyNguoiDung nguoiDung;
-    private static int pos = 0;
+    private int pos = 0;
     private boolean isAsc = true;
     private TableRowSorter<DefaultTableModel> tableRowSorter;
     public quan_ly_nguoi_dungJPanel() {
