@@ -4,7 +4,7 @@
  */
 package form_main;
 
-import DAO.QuanLyDocGia;
+import Contructor.QuanLyDocGia;
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

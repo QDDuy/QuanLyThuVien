@@ -4,7 +4,7 @@
  */
 package DAO;
 
-
+import Contructor.QuanLyDocGia;
 import connectsql.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,90 +12,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.spi.DirStateFactory;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author haloi
  */
-public class QuanLyDocGia {
-
-
-    private int MaTHe;
-    private String tenKH;
-    private String diachi;
-    private String SDT;
-    private String cccd;
-    private String email;
-    
-    
-    public QuanLyDocGia(int MaTHe, String tenKH, String diachi, String SDT, String cccd, String email) {
-        this.MaTHe = MaTHe;
-        this.tenKH = tenKH;
-        this.diachi = diachi;
-        this.SDT = SDT;
-        this.cccd = cccd;
-        this.email = email;
-    }
-
-    public QuanLyDocGia() {
-    }
-
-    public void setMaTHe(int MaTHe) {
-        this.MaTHe = MaTHe;
-    }
-
-    public void setTenKH(String tenKH) {
-        this.tenKH = tenKH;
-    }
-
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
-    }
-
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
-    }
-
-    public void setCccd(String cccd) {
-        this.cccd = cccd;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getMaTHe() {
-        return MaTHe;
-    }
-
-    public String getTenKH() {
-        return tenKH;
-    }
-
-    public String getDiachi() {
-        return diachi;
-    }
-
-    public String getSDT() {
-        return SDT;
-    }
-
-    public String getCccd() {
-        return cccd;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-   
-    // xu ly su kien them, sua, xoa, tim kiem, hiển thị
+public class DAO_qlDocGia extends QuanLyDocGia{
+       // xu ly su kien them, sua, xoa, tim kiem, hiển thị
     public List<QuanLyDocGia> getList(){
         Connection conn = DatabaseConnection.getConnection();
         String sql = "select * from DocGia";
@@ -193,5 +117,4 @@ public class QuanLyDocGia {
     }
     return 0;
 }
-
 }

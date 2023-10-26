@@ -4,7 +4,7 @@
  */
 package form_main;
 
-import DAO.QuanLyNguoiDung;
+import Contructor.QuanLyNguoiDung;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.RowFilter;
